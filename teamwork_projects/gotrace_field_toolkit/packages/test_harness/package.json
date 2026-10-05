@@ -1,0 +1,33 @@
+{
+  "name": "@gotrace/test-harness",
+  "version": "1.0.0",
+  "description": "GoTRACE Field Integration Toolkit - End-to-End Test Harness & Benchmark Suite",
+  "type": "module",
+  "main": "src/runner.ts",
+  "scripts": {
+    "test": "node --experimental-strip-types src/runner.ts",
+    "test:native": "node --experimental-strip-types --test tests/**/*.test.ts",
+    "test:tier1": "node --experimental-strip-types --test tests/tier1_features/*.test.ts",
+    "test:tier2": "node --experimental-strip-types --test tests/tier2_boundaries/*.test.ts",
+    "test:tier3": "node --experimental-strip-types --test tests/tier3_pairwise/*.test.ts",
+    "test:tier4": "node --experimental-strip-types --test tests/tier4_scenarios/*.test.ts",
+    "benchmark": "node --experimental-strip-types src/benchmark/latency_profiler.ts"
+  },
+  "keywords": [
+    "gotrace",
+    "e2e-testing",
+    "weighbridge",
+    "zalo",
+    "erp",
+    "benchmark",
+    "sha256",
+    "gci"
+  ],
+  "dependencies": {
+    "@gotrace/edge-bridge": "*",
+    "@gotrace/zalo-mini-app": "*",
+    "@gotrace/erp_connector": "*"
+  },
+  "author": "GoTRACE QA & Test Engineering Team",
+  "license": "Apache-2.0"
+}

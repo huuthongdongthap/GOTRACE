@@ -1,0 +1,29 @@
+{
+  "name": "gotrace-field-toolkit",
+  "version": "1.0.0",
+  "description": "GoTRACE Field Integration Toolkit — Edge Bridge, Zalo Mini App, ERP Connector & E2E Test Harness",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "test": "node --experimental-strip-types --test packages/edge_bridge/tests/**/*.test.ts packages/test_harness/tests/**/*.test.ts",
+    "test:edge": "npm run test --workspace=@gotrace/edge-bridge",
+    "test:harness": "npm run test --workspace=@gotrace/test-harness",
+    "build": "npm run build --workspaces --if-present",
+    "typecheck": "/Users/mac/mekong\\ cli\\ lastest/GOTRACE/pmo-web-app/node_modules/typescript/bin/tsc --noEmit -p tsconfig.json"
+  },
+  "keywords": [
+    "gotrace",
+    "mekong-delta",
+    "edge-bridge",
+    "weighbridge",
+    "zalo-mini-app",
+    "erp-connector",
+    "gci",
+    "traceability"
+  ],
+  "author": "GoTRACE Engineering Team",
+  "license": "Apache-2.0"
+}

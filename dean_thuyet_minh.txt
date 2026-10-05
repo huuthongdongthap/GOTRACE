@@ -1,0 +1,291 @@
+CÔNG TY CỔ PHẦN TƯ VẤN VÀ CÔNG NGHỆ ZAM VIỆT NAM
+TÀI LIỆU TRÌNH LÃNH ĐẠO
+ĐỀ ÁN / THUYẾT MINH
+NỀN TẢNG DỮ LIỆU CHUỖI CUNG ỨNG SỐ,
+SẢN PHẨM - HÀNG HÓA VÀ THỊ TRƯỜNG
+— GOTRACE V2.2 —
+Hướng tới hình thành hạ tầng dữ liệu dùng chung phục vụ quản lý chuỗi cung ứng, minh bạch thị trường, quản trị rủi ro, kinh tế tuần hoàn và nâng cao năng lực cạnh tranh của hàng hóa Việt Nam.
+Hà Nội, tháng 9 năm 2026
+THÔNG TIN TÀI LIỆU
+Lưu ý:
+Tài liệu này là bản đề án/thuyết minh định hướng, không thay thế văn bản quy phạm pháp luật, quyết định hành chính, SRS hoặc thiết kế kiến trúc chi tiết. Các chỉ tiêu hiệu quả định lượng, chi phí đầu tư và ROI cần được xây dựng trong Business Case/Báo cáo nghiên cứu khả thi trên dữ liệu thí điểm và giả định được phê duyệt.
+MỤC LỤC TÓM TẮT
+I. Tóm tắt điều hành
+II. Bối cảnh và sự cần thiết
+III. Hiện trạng và những vấn đề đặt ra
+IV. Quan điểm, mục tiêu và nguyên tắc phát triển
+V. Định vị GOTRACE V2.2
+VI. Mô hình dữ liệu và hồ sơ số vòng đời
+VII. GCI - cơ chế định danh thống nhất
+VIII. Giá trị đối với doanh nghiệp và người dân
+IX. Mô hình quản lý Nhà nước
+X. Market Observatory - quan sát thị trường
+XI. Lợi ích và ý nghĩa ở tầm quốc gia
+XII. Nền tảng công nghệ và đổi mới sáng tạo
+XIII. Quản trị dữ liệu, an toàn và chia sẻ
+XIV. Kết nối hệ thống hiện hữu
+XV. Phương án triển khai và phạm vi thí điểm
+XVI. Lộ trình mở rộng
+XVII. Mô hình tổ chức, phối hợp và quản trị
+XVIII. Hiệu quả kinh tế - xã hội dự kiến
+XIX. Hệ thống chỉ tiêu đánh giá
+XX. Rủi ro và biện pháp kiểm soát
+XXI. Nội dung đề xuất, kiến nghị và xin ý kiến
+Phụ lục A. Thuật ngữ và từ viết tắt
+Phụ lục B. Khung KPI/Acceptance tham chiếu
+I. TÓM TẮT ĐIỀU HÀNH
+GOTRACE V2.2 được đề xuất như một lớp hạ tầng dữ liệu dùng chung để kết nối dấu vết số của sản phẩm, hàng hóa, chủ thể và sự kiện xuyên suốt chuỗi cung ứng.
+Nền kinh tế số làm phát sinh ngày càng nhiều dữ liệu trong sản xuất, lưu thông, thương mại, chất lượng, logistics, bảo hành và tái chế. Tuy nhiên, dữ liệu thường nằm rời rạc tại từng doanh nghiệp, từng hệ thống và từng cơ quan. Hệ quả là rất khó hình thành một bức tranh xuyên suốt từ nguyên liệu đến sản phẩm, từ sản phẩm đến lưu thông, từ lưu thông đến tiêu dùng và sau sử dụng.
+GOTRACE V2.2 giải quyết bài toán này bằng một lớp định danh, chuẩn hóa và kết nối dữ liệu. Nền tảng không thay thế ERP, MES, WMS, TMS, POS, QMS hoặc CSDL chuyên ngành; thay vào đó, GOTRACE tạo một ngôn ngữ dữ liệu chung để các hệ thống có thể liên kết với nhau theo GCI, event, graph, evidence và policy.
+Đối với quản lý Nhà nước, GOTRACE hướng tới chuyển từ phương thức tổng hợp chủ yếu theo báo cáo định kỳ sang khả năng quan sát dữ liệu tham gia/kết nối gần hơn với thực tế, nhưng vẫn tuân thủ nguyên tắc thẩm quyền và bảo vệ dữ liệu. Cơ quan cấp trên không mặc định nhìn toàn bộ chi tiết; quyền xem và drill-down được xác định theo mandate, địa bàn, ngành, mục đích, loại dữ liệu và case.
+Đối với thị trường, GOTRACE có thể từng bước hình thành dữ liệu về lưu chuyển hàng hóa, tồn kho, giá quan sát, chất lượng, thu hồi và kinh tế tuần hoàn. Tuy nhiên, mọi chỉ số phải đi kèm coverage, freshness và methodology; nền tảng không mặc định tuyên bố bao phủ toàn thị trường khi dữ liệu chưa đủ.
+Hình 1. Chuỗi giá trị dữ liệu của GOTRACE V2.2
+II. BỐI CẢNH VÀ SỰ CẦN THIẾT
+Yêu cầu quản lý chuỗi cung ứng ngày càng vượt ra ngoài bài toán truy xuất nguồn gốc đơn lẻ.
+Một sản phẩm từ nguyên liệu ban đầu đến khi được sản xuất, kiểm nghiệm, lưu thông, tiêu dùng, bảo hành, thu hồi hoặc tái chế có sự tham gia của nhiều chủ thể. Mỗi chủ thể phát sinh dữ liệu riêng: hồ sơ vùng nguyên liệu, công thức/BOM, kết quả kiểm nghiệm, chứng từ vận tải, tồn kho, giao dịch, bảo hành, khiếu nại và dữ liệu sau sử dụng.
+Trong khi đó, nhu cầu quản lý hiện đại đòi hỏi khả năng trả lời các câu hỏi xuyên chuỗi: một lô hàng được hình thành từ đâu; đã đi qua những cơ sở nào; chất lượng được kiểm tra ra sao; đang phân phối ở đâu; khi có sự cố thì phạm vi ảnh hưởng là gì; nguồn tài nguyên sau sử dụng quay lại nền kinh tế như thế nào.
+Các yêu cầu về minh bạch chuỗi cung ứng, truy xuất, trách nhiệm môi trường và dữ liệu vòng đời cũng ngày càng gắn với năng lực cạnh tranh của hàng hóa. Do đó, vấn đề không còn chỉ là số hóa một doanh nghiệp hay một khâu, mà là khả năng liên thông dữ liệu xuyên chuỗi trong khi vẫn bảo đảm quyền sở hữu, bảo mật và thẩm quyền quản lý.
+GOTRACE được định hướng để tạo lớp hạ tầng kết nối dùng chung cho bài toán này: định danh thống nhất, event ledger, supply-chain graph, evidence/provenance, policy-based data sharing và các lớp phân tích dành cho doanh nghiệp, người dân và cơ quan Nhà nước.
+III. HIỆN TRẠNG VÀ NHỮNG VẤN ĐỀ ĐẶT RA
+Các điểm nghẽn chính nằm ở phân mảnh dữ liệu, thiếu định danh chung, khó kiểm chứng và thiếu cơ chế khai thác theo thẩm quyền.
+Các vấn đề trên không thể giải quyết triệt để chỉ bằng việc phát hành thêm mã QR. Mã QR, RFID, NFC hoặc barcode chỉ là vật mang định danh; giá trị nằm ở dữ liệu, sự kiện, quan hệ, bằng chứng và quyền khai thác phía sau mã.
+IV. QUAN ĐIỂM, MỤC TIÊU VÀ NGUYÊN TẮC PHÁT TRIỂN
+GOTRACE V2.2 ưu tiên kiến trúc mở, bằng chứng, liên thông và triển khai từng bước.
+Quan điểm phát triển cốt lõi là xây dựng một Universal Core dùng chung cho nhiều ngành, trong đó khác biệt chuyên ngành được cấu hình thông qua Industry Pack, Rule Pack và Governance Pack. Cách tiếp cận này giúp tránh tạo một hệ thống hoàn toàn mới cho từng ngành và tạo điều kiện mở rộng theo cùng một chuẩn dữ liệu.
+Identity before traceability: trước khi truy xuất phải xác định rõ đối tượng là ai/cái gì.
+Data once - reuse many: dữ liệu đã phát sinh được tái sử dụng cho trace, compliance, market intelligence và reporting.
+Evidence-first: claim, trạng thái và kết luận phải truy ngược được tới nguồn, phương pháp, bằng chứng và phạm vi xác minh.
+Append, do not silently rewrite: lịch sử không bị sửa đè âm thầm; correction, supersede và revoke phải có audit.
+Federated by design: không bắt buộc gom toàn bộ payload về một nơi; có thể quản registry, graph, metadata và evidence index trong khi dữ liệu chi tiết vẫn ở nguồn.
+Coverage-aware: dashboard và KPI phải thể hiện độ bao phủ, độ mới, nguồn và UNKNOWN.
+Connect, not replace: kết nối hệ thống hiện hữu, không tạo áp lực thay thế đồng loạt.
+Mục tiêu của V2.2 là hình thành một nền tảng đủ chặt để làm baseline cho SRS/Architecture, nhưng đủ mở để triển khai thí điểm theo từng ngành, địa phương và nhóm dữ liệu.
+V. ĐỊNH VỊ GOTRACE V2.2
+Từ truy xuất nguồn gốc sang hạ tầng dữ liệu chuỗi cung ứng, vòng đời và thị trường.
+Truy xuất nguồn gốc truyền thống thường tập trung vào câu hỏi “sản phẩm này đến từ đâu?”. GOTRACE mở rộng câu hỏi thành: sản phẩm được hình thành như thế nào, đã đi qua đâu, ai chịu trách nhiệm, chất lượng được kiểm tra ra sao, hiện trạng thế nào, phạm vi ảnh hưởng khi có sự cố là gì, và tài nguyên sau sử dụng quay lại nền kinh tế ra sao.
+Định vị này tạo ba lớp giá trị. Lớp thứ nhất là identity và registry - biết đối tượng nào đang được nói tới. Lớp thứ hai là event và graph - biết điều gì đã xảy ra và các đối tượng liên quan với nhau thế nào. Lớp thứ ba là evidence, analytics và governance - biết dữ liệu đến từ đâu, tin cậy đến mức nào và ai được phép sử dụng cho mục đích gì.
+Marketplace hoặc thương mại điện tử, nếu có, chỉ là một lớp dịch vụ. Giá trị chiến lược của GOTRACE nằm ở Data Core: GCI + Product/Party Registry + Digital Product Passport + Digital BOM khi áp dụng + Supply Chain Graph + Event Data + Evidence + API/Data Exchange + Analytics/AI.
+Hình 2. Mô hình dữ liệu nghiệp vụ phổ quát
+VI. MÔ HÌNH DỮ LIỆU VÀ HỒ SƠ SỐ VÒNG ĐỜI
+Một sản phẩm không chỉ có “hồ sơ tĩnh”; giá trị nằm ở lịch sử sự kiện và quan hệ theo thời gian.
+Universal Core của GOTRACE xoay quanh PARTY, PLACE, ITEM, EVENT, BUSINESS_CONTEXT, CREDENTIAL, SCOPE, EVIDENCE và CASE. Đây là các primitive nghiệp vụ đủ phổ quát để mô tả nhiều ngành mà không phải thay lõi dữ liệu.
+Hồ sơ số vòng đời của sản phẩm hoặc tài sản liên kết thông tin khởi tạo với các event sản xuất, kiểm nghiệm, đóng gói, lưu kho, vận chuyển, bán hàng, lắp đặt, bảo trì, thu hồi và tái chế. Mỗi event có thời gian, actor, location, object/input-output, action/result và evidence/provenance khi có.
+Temporal graph cho phép hai hướng truy xuất. Traceback đi từ sản phẩm/serial về nguồn nguyên liệu, lô đầu vào, nhà cung cấp và evidence. Traceforward đi từ một lot lỗi tới các output, shipment, điểm nhận và đối tượng bị ảnh hưởng. Đây là nền tảng cho recall, điều tra sự cố và phân tích rủi ro chuỗi cung ứng.
+VII. GCI - CƠ CHẾ ĐỊNH DANH THỐNG NHẤT
+GCI là điểm neo canonical để kết nối các hệ thống khác nhau mà không phụ thuộc vật mang định danh.
+GCI (GOTRACE Canonical Identifier) được sử dụng để định danh thống nhất các đối tượng tham gia mạng dữ liệu. Cấu trúc tham chiếu GT:<CC>:<TYPE>:<AUTHORITY>:<LOCAL-ID> giúp xác định namespace, loại đối tượng, phạm vi cấp và mã cục bộ. GCI không chứa toàn bộ dữ liệu nghiệp vụ trong chính chuỗi mã; dữ liệu nằm ở hồ sơ, event, relation và evidence liên kết tới GCI.
+Một nguyên tắc quan trọng là GCI độc lập với QR/Barcode/RFID/NFC/URL. Khi thay vật mang hoặc thay resolver host, căn tính của đối tượng không thay đổi. Điều này giúp tránh việc “mã truy xuất” trở thành nguồn phụ thuộc duy nhất của hệ thống.
+GOTRACE cũng tách rõ REGISTERED, VERIFIED và CERTIFIED. REGISTERED chỉ có nghĩa hồ sơ/định danh tồn tại hợp lệ; VERIFIED là claim hoặc trường dữ liệu đã được kiểm tra theo scope và method; CERTIFIED chỉ được dùng khi có chương trình chứng nhận và cơ sở quản trị/pháp lý tương ứng. Đây là điều kiện để tránh biến dữ liệu tự khai thành “đã xác minh”.
+VIII. GIÁ TRỊ ĐỐI VỚI DOANH NGHIỆP VÀ NGƯỜI DÂN
+Cùng một lõi dữ liệu nhưng cung cấp hai trải nghiệm khác nhau: vận hành doanh nghiệp và minh bạch có chọn lọc cho người dân.
+Đối với doanh nghiệp, GOTRACE hỗ trợ tái sử dụng hồ sơ sản phẩm và dữ liệu sự kiện cho nhiều mục đích: quản lý lô/serial, sản xuất, chất lượng, logistics, bán hàng, bảo hành, recall, compliance và báo cáo. Điều này có thể giảm nhập liệu lặp và tăng khả năng đối soát, với điều kiện các connector và source-of-truth được cấu hình rõ ràng.
+Đối với người dân, public profile cho phép tra cứu trạng thái hiện hành, nguồn/provenance, mức xác minh, dữ liệu chất lượng được phép công khai, cảnh báo/thu hồi và thời điểm cập nhật. Người dân có thể gửi phản ánh và evidence, nhận mã case và theo dõi trạng thái theo chính sách.
+Selective disclosure là nguyên tắc bắt buộc: public scan không được làm lộ regulator notes, supplier confidential, BOM/price nội bộ hoặc PII. Minh bạch không đồng nghĩa với công khai toàn bộ dữ liệu.
+IX. MÔ HÌNH QUẢN LÝ NHÀ NƯỚC TRÊN GOTRACE
+Government Layer là một projection nghiệp vụ riêng, không phải dashboard doanh nghiệp được mở rộng quyền.
+GOTRACE mô hình hóa hệ thống quản lý nhiều cấp từ Trung ương, Bộ/ngành, Cục/Vụ/đơn vị, Tỉnh/Thành phố, Sở/ngành đến đơn vị tác nghiệp. Phạm vi dữ liệu không suy ra chỉ từ chức danh mà từ mandate, territory, industry, purpose, data class, time và case.
+Nguyên tắc aggregate-first cho phép lãnh đạo quan sát bức tranh tổng hợp trước. Khi cần đi sâu, hệ thống mới drill-down từ KPI → category → geography → party/place → item/lot → event → evidence nếu có quyền. Điều này vừa hỗ trợ quản lý đa cấp vừa hạn chế rủi ro một cấp quản lý nhìn quá mức dữ liệu doanh nghiệp hoặc dữ liệu restricted.
+Alert và case management tạo vòng xử lý từ cảnh báo hoặc phản ánh đến phân loại, giao xử lý, điều tra/kiểm tra, hành động, kết quả và đóng hồ sơ. Báo cáo phục vụ quản lý có thể được freeze theo query time, lưu scope, sources, coverage và rule/KPI version để có khả năng tái lập.
+Hình 3. Mô hình phân cấp và quyền quản lý Nhà nước
+X. MARKET OBSERVATORY - QUAN SÁT THỊ TRƯỜNG
+Mục tiêu không phải “nắm toàn thị trường” ngay lập tức, mà xây năng lực quan sát có coverage và methodology minh bạch.
+Market Observatory tách master/declared data khỏi observed transaction/flow data. Một sản phẩm có trong registry không đồng nghĩa đang lưu hành; giá niêm yết không đồng nghĩa giá giao dịch; một mẫu POS không đại diện toàn thị trường nếu coverage thấp.
+Market cube tối thiểu có các chiều product/category, time, geography, channel, party type, metric và coverage. Dữ liệu observed, declared, verified, estimated và forecast phải được phân biệt bằng metadata. Giá cần chuẩn hóa UOM/package/tax/condition/observation type trước khi so sánh hoặc tổng hợp.
+Khi coverage đủ và methodology được quản trị, nền tảng có thể hỗ trợ heatmap dòng hàng, supply concentration, abnormal price/volume, stock risk và tín hiệu supply-demand. Các kết quả này là công cụ hỗ trợ điều hành và phân tích; không tự động trở thành kết luận pháp lý hoặc số liệu “toàn thị trường”.
+XI. LỢI ÍCH VÀ Ý NGHĨA Ở TẦM QUỐC GIA
+Giá trị quốc gia của GOTRACE nằm ở khả năng tạo ngôn ngữ dữ liệu dùng chung và tăng năng lực phối hợp xuyên chuỗi.
+Các lợi ích trên là giá trị kỳ vọng của nền tảng. Mức độ đạt được cần được đo bằng KPI và dữ liệu pilot; tài liệu này không giả định trước tỷ lệ tiết kiệm, tăng trưởng hoặc ROI khi chưa có số liệu thực nghiệm.
+XII. NỀN TẢNG CÔNG NGHỆ VÀ ĐỔI MỚI SÁNG TẠO
+Công nghệ là phương tiện tăng khả năng kiểm chứng, phân tích và vận hành; không phải mục tiêu tự thân.
+GOTRACE V2.2 bổ sung định hướng Blockchain/DLT, AI/Generative AI, Machine Learning, Big Data/Lakehouse, Knowledge Graph, Digital Twin, IoT/Edge, Cloud/Hybrid và Event-driven Architecture. Việc lựa chọn công nghệ tuân theo nguyên tắc fit-for-purpose: chỉ áp dụng khi giải quyết được yêu cầu nghiệp vụ rõ ràng.
+Hình 4. Kiến trúc công nghệ định hướng của GOTRACE V2.2
+Blockchain/DLT được dùng có chọn lọc để neo hash, timestamp và issuer của evidence/event/credential trong các bài toán nhiều tổ chức cần kiểm chứng độc lập; không lưu mặc định toàn bộ PII hoặc dữ liệu mật lên chuỗi. AI Copilot hỗ trợ tìm kiếm, tóm tắt, giải thích và báo cáo nhưng phải kế thừa quyền truy cập, chỉ ra nguồn và không tự tạo quyết định hành chính. Machine Learning hỗ trợ anomaly, risk scoring và forecast với model registry, drift monitoring và human-in-the-loop.
+Big Data/Lakehouse hỗ trợ lưu trữ và phân tích khối lượng event, sensor và market signals lớn; Knowledge Graph giúp phân tích quan hệ nhiều tầng; IoT/Edge đưa observation vật lý vào hồ sơ số; Cloud/Hybrid cho phép triển khai phù hợp phân loại dữ liệu và yêu cầu chủ quyền dữ liệu.
+XIII. QUẢN TRỊ DỮ LIỆU, AN TOÀN VÀ CHIA SẺ
+Dữ liệu chỉ có giá trị quản lý khi có nguồn, quyền, phân loại, thời gian hiệu lực và cơ chế audit rõ ràng.
+GOTRACE phân loại dữ liệu tối thiểu theo PUBLIC, SHARED, ENTERPRISE CONFIDENTIAL, REGULATOR RESTRICTED, PERSONAL và SENSITIVE/SPECIAL. Quyền truy cập sử dụng RBAC kết hợp ABAC theo role, organization, relationship, territory, industry, purpose, data class, time và consent/authorization.
+Mọi connector phải có source of truth, schema/version, idempotency, reconciliation và error/dead-letter handling. Reference data bên ngoài phải lưu source, effective_at, fetched_at, version và expiry/review; dữ liệu đồng bộ không được tự coi là authority-backed nếu nguồn không có thẩm quyền hoặc chưa xác minh.
+Đối với dữ liệu thị trường hoặc báo cáo tổng hợp, privacy threshold và aggregate-first giúp giảm rủi ro suy ngược dữ liệu cá nhân hoặc bí mật thương mại. Audit phải ghi nhận hành vi xem, sửa, xuất hoặc chia sẻ dữ liệu restricted theo policy.
+XIV. KẾT NỐI HỆ THỐNG HIỆN HỮU - KHÔNG THAY THẾ
+GOTRACE tạo lớp liên thông để bảo toàn đầu tư hiện có của doanh nghiệp và cơ quan Nhà nước.
+Các hệ thống ERP/MES/QMS/LIMS tiếp tục quản lý sản phẩm, BOM, sản xuất, QC và kiểm nghiệm; WMS/TMS/IoT quản lý kho, vận tải, custody và sensor; POS/E-commerce/OMS quản lý bán hàng, order, return và stock; CRM/Service/EAM quản lý bảo hành và tài sản. GOTRACE kết nối các nguồn này thông qua API, webhook, event stream, batch, file hoặc offline/mobile.
+Mỗi nguồn vẫn giữ vai trò source-of-truth trong phạm vi đã được xác định. GOTRACE quản lý mapping định danh, schema, provenance, reconciliation và graph liên kết. Cách tiếp cận này giúp giảm nhu cầu thay đổi đồng loạt các hệ thống đang vận hành và hạn chế tạo thêm một “ốc đảo dữ liệu” mới.
+XV. PHƯƠNG ÁN TRIỂN KHAI VÀ PHẠM VI THÍ ĐIỂM
+Triển khai theo nguyên tắc “nhỏ nhưng thật”: dữ liệu thật, chuỗi thật, quyền thật và bài toán quản lý thật.
+Giai đoạn thí điểm nên chọn một số ngành hàng hoặc chuỗi sản phẩm có dữ liệu tương đối rõ, có nhu cầu truy xuất/chất lượng/thu hồi thực tế, có doanh nghiệp tham gia và có cơ quan quản lý sẵn sàng phối hợp. Không nên bắt đầu bằng mục tiêu bao phủ quá rộng hoặc gom toàn bộ dữ liệu của mọi bên.
+Một pilot tối thiểu cần chứng minh bốn nhóm năng lực: (1) GCI + product/lot/serial registry; (2) event ledger + graph + evidence; (3) dashboard/case theo quyền; (4) connector với ít nhất một số hệ thống nguồn thực. Nếu có Market Observatory, cần đo coverage và ghi rõ giới hạn dữ liệu.
+Phạm vi Government Pilot trong baseline có thể hướng tới 1 Bộ/ngành và 1-2 Tỉnh/Sở để kiểm chứng hierarchy, mandate/policy, dashboard, alert, case và audit. Việc lựa chọn cụ thể phải phụ thuộc thẩm quyền, dữ liệu sẵn có và chủ trương của các cơ quan liên quan.
+XVI. LỘ TRÌNH MỞ RỘNG
+Từ foundation đến national/industry scale, mỗi giai đoạn có exit criteria trước khi chuyển bước.
+Hình 5. Lộ trình P0-P5 của GOTRACE V2.2
+P0 tập trung GCI, party/place, product registry, lot/serial, event ledger, graph, evidence và IAM. P1 đưa dữ liệu production, quality, logistics, integration và recall vào vận hành thật. P2 mở public profile, consumer scan, commerce/POS/inventory và warranty. P3 kiểm chứng Government Layer với hierarchy, mandate, dashboard, alert và case. P4 xây Market Observatory và AI/ML trên dữ liệu có coverage. P5 mở rộng bằng Industry/Governance Packs và các connector liên cơ quan.
+Điều kiện quan trọng là không đẩy AI, Blockchain hoặc Big Data lên trước khi data foundation, source-of-truth, identity, quality và quyền truy cập đủ ổn định. Công nghệ nâng cao phải được đưa vào đúng thời điểm và gắn với use case có giá trị.
+XVII. MÔ HÌNH TỔ CHỨC, PHỐI HỢP VÀ QUẢN TRỊ
+Một nền tảng liên ngành cần cơ chế quản trị dữ liệu và quyết định rõ hơn một dự án CNTT đơn lẻ.
+Đề xuất hình thành cơ chế chỉ đạo/điều phối ở cấp phù hợp với phạm vi pilot; dưới đó là nhóm nghiệp vụ, nhóm quản trị dữ liệu, nhóm kiến trúc/công nghệ, nhóm pháp lý/an toàn và các đầu mối ngành/địa phương. Mục tiêu là tách rõ ai quyết định taxonomy, ai chịu trách nhiệm nguồn dữ liệu, ai phê duyệt rule, ai vận hành connector và ai xử lý case.
+Data Governance Council hoặc cơ chế tương đương cần phê duyệt dictionary, methodology, KPI version, namespace/TYPE/AUTHORITY registry và các nguyên tắc data sharing. Đối với Industry Pack/Governance Pack, phải có quy trình version, effective date, sandbox/test, approval và rollback.
+XVIII. HIỆU QUẢ KINH TẾ - XÃ HỘI DỰ KIẾN
+Hiệu quả cần được đánh giá theo giá trị quản lý, giá trị doanh nghiệp, giá trị xã hội và năng lực dữ liệu quốc gia; không nên chỉ đo bằng số lượng mã được phát hành.
+Ở góc độ quản lý, hiệu quả kỳ vọng là rút ngắn thời gian xác định phạm vi sự cố/thu hồi, tăng khả năng truy xuất từ KPI tới bằng chứng, nâng mức độ cập nhật của dữ liệu tham gia/kết nối và giảm tình trạng tổng hợp báo cáo thủ công khi connector đã vận hành ổn định.
+Ở góc độ doanh nghiệp, giá trị kỳ vọng bao gồm giảm nhập liệu lặp, tăng trace completeness, tăng khả năng đối soát nguồn, tái sử dụng hồ sơ cho nhiều quy trình và giảm thời gian xử lý recall/compliance. Các lợi ích này phải được đo trên pilot, vì mức tiết kiệm phụ thuộc mức độ số hóa hiện hữu và chất lượng tích hợp của từng doanh nghiệp.
+Ở góc độ xã hội, nền tảng hỗ trợ minh bạch trạng thái hàng hóa, cảnh báo/thu hồi, phản ánh của người dân và khả năng liên kết dữ liệu vòng đời, qua đó góp phần tạo niềm tin và sử dụng tài nguyên hiệu quả hơn. Ở tầm quốc gia, giá trị dài hạn là hình thành chuẩn dữ liệu và năng lực liên thông để nhiều ngành có thể dùng chung thay vì phát triển các hệ thống khép kín, khó kết nối.
+Về tài chính, BRD gốc định hướng cần lập Business Case riêng với CAPEX/OPEX, chi phí integration/onboarding và mô hình dịch vụ; TCO 3-5 năm phải bao gồm hạ tầng, security, DR, data governance và support. Mọi dự báo ROI/GMV cần có assumptions, source, sensitivity và independent review. Vì vậy, tài liệu này không đưa con số lợi ích tài chính chưa có dữ liệu kiểm chứng.
+XIX. HỆ THỐNG CHỈ TIÊU ĐÁNH GIÁ
+KPI phải đo được cả độ bao phủ dữ liệu, chất lượng vận hành và giá trị nghiệp vụ.
+Mỗi KPI cần owner, business definition, numerator/denominator, filters, source, update frequency, coverage rule, privacy rule, version và drill-down path. Chỉ khi các thuộc tính này được khóa, KPI mới có thể dùng ổn định cho báo cáo quản lý.
+XX. RỦI RO VÀ BIỆN PHÁP KIỂM SOÁT
+Rủi ro lớn nhất không chỉ là công nghệ; còn là diễn giải sai phạm vi dữ liệu, quyền và mức độ xác minh.
+XXI. NỘI DUNG ĐỀ XUẤT, KIẾN NGHỊ VÀ XIN Ý KIẾN
+Để chuyển từ định hướng sang triển khai, cần khóa một số quyết định về phạm vi, dữ liệu, quản trị và pilot.
+Thống nhất định vị GOTRACE V2.2 là nền tảng dữ liệu chuỗi cung ứng số, sản phẩm - hàng hóa và thị trường; không chỉ là hệ thống QR hoặc marketplace.
+Cho phép xây dựng/pilot Universal Core gồm GCI, Party/Place, Product Registry, Lot/Serial, Event Ledger, Supply Chain Graph, Evidence và IAM.
+Lựa chọn 1-2 chuỗi/ngành hàng và phạm vi địa phương/Bộ-ngành phù hợp để pilot trên dữ liệu thật, xác định rõ source-of-truth và quyền chia sẻ.
+Thống nhất nguyên tắc Government Layer theo mandate, territory, industry, purpose, data class, time và case; aggregate-first và drill-down có kiểm soát.
+Giao xây dựng khung Data Governance cho taxonomy, TYPE/AUTHORITY registry, KPI methodology, verification states và Industry/Governance Packs.
+Cho phép nghiên cứu kết nối các CSDL/hệ thống hiện hữu theo nguyên tắc connect, not replace; ưu tiên API/connector và reconciliation.
+Cho phép triển khai công nghệ nâng cao theo use case: Blockchain/DLT cho evidence anchoring; AI/ML cho copilot, anomaly/risk/forecast; Big Data/Lakehouse cho Market Observatory; IoT/Edge cho observation vật lý.
+Yêu cầu lập Business Case/Báo cáo nghiên cứu khả thi riêng cho CAPEX/OPEX, TCO, integration/onboarding, phương án vận hành và mô hình tài chính; không đưa dự báo ROI chưa có nguồn và giả định kiểm chứng.
+Sau pilot, tổ chức đánh giá độc lập theo Acceptance Criteria, KPI và lessons learned trước khi quyết định mở rộng quốc gia/ngành.
+Các quyết định mở cần được ghi thành ADR/Policy Decision trước khi baseline SRS, đặc biệt đối với data ownership, retention, namespace/LOCAL-ID, Product Registry tập trung hay federated, authority connector và methodology của KPI thị trường.
+PHỤ LỤC A. THUẬT NGỮ VÀ TỪ VIẾT TẮT
+Bảng dùng chung để hạn chế hiểu khác nhau giữa lãnh đạo, nghiệp vụ và kỹ thuật.
+PHỤ LỤC B. KHUNG KPI VÀ TIÊU CHÍ NGHIỆM THU THAM CHIẾU
+Khung này dùng để xây kế hoạch đo pilot; giá trị mục tiêu cụ thể phải được phê duyệt theo ngành/use case.
+Nguồn tham chiếu nội bộ: BRD GOTRACE V2.2 Technology Enhanced Complete; Tài liệu thuyết minh GOTRACE V2.2; GCI Canonical Identifier Standard; các Industry Pack/đề xuất chuyên ngành liên quan. Trước khi trình chính thức, cần rà soát pháp lý, chủ trương, cơ chế dữ liệu và thông tin tổ chức theo phạm vi cơ quan tiếp nhận.
+THÔNG ĐIỆP KẾT LUẬN
+GOTRACE hướng tới tạo một hạ tầng dữ liệu để từ dấu vết số của từng sản phẩm hình thành giá trị quản trị cho toàn chuỗi và thị trường.
+TỪ MỘT SẢN PHẨM → NHÌN THẤY MỘT VÒNG ĐỜI
+TỪ MỘT VÒNG ĐỜI → NHÌN THẤY MỘT CHUỖI CUNG ỨNG
+TỪ NHIỀU CHUỖI CUNG ỨNG → TỪNG BƯỚC NHÌN THẤY SỰ VẬN ĐỘNG CỦA THỊ TRƯỜNG
+TỪ DỮ LIỆU → TẠO MINH BẠCH → TẠO NIỀM TIN → TẠO GIÁ TRỊ → HƯỚNG TỚI PHÁT TRIỂN BỀN VỮNG
+GOTRACE V2.2 đề xuất một cách tiếp cận thận trọng nhưng có khả năng mở rộng: xây đúng định danh, đúng dữ liệu, đúng bằng chứng và đúng quyền trước; sau đó mới mở rộng phân tích, AI, thị trường và quy mô quốc gia. Đây là nền tảng để dữ liệu chuỗi cung ứng trở thành nguồn lực phục vụ doanh nghiệp, người dân và quản lý Nhà nước một cách có kiểm soát.
+Thuộc tính | Nội dung
+Tên tài liệu | Đề án/Thuyết minh GOTRACE V2.2 dành cho Lãnh đạo và Cơ quan Nhà nước
+Tài liệu nền | BRD-GOTRACE-V2.2-CORE-GOV-MKT-TECH-01; Tài liệu thuyết minh GOTRACE V2.2; các tài liệu GCI và Industry Pack liên quan
+Mục đích | Trình bày sự cần thiết, mô hình GOTRACE, giá trị quản lý nhà nước, dữ liệu thị trường, phương án triển khai, hiệu quả dự kiến và nội dung cần xin chủ trương/ý kiến.
+Đối tượng đọc | Lãnh đạo Trung ương, Bộ/ngành, Tỉnh/Thành phố, Sở/ngành, cơ quan điều phối, đơn vị quản lý chuyên ngành và các bên liên quan.
+Phạm vi | Đa ngành, đa chủ thể, xuyên vòng đời; kết nối doanh nghiệp - người dân - cơ quan Nhà nước theo thẩm quyền.
+Nguyên tắc | Kết nối, không thay thế; dữ liệu có nguồn và bằng chứng; phân quyền theo thẩm quyền; mở rộng từng bước; đo coverage và hiệu quả trước khi nhân rộng.
+Vấn đề | Biểu hiện
+Dữ liệu phân tán | Sản phẩm, nguyên liệu, chất lượng, logistics, bán hàng, bảo hành và tái chế được quản lý trên nhiều hệ thống khác nhau.
+Thiếu định danh canonical | Một đối tượng có thể mang nhiều mã ở nhiều hệ thống, làm khó đối soát và truy xuất xuyên chuỗi.
+Thiếu ngôn ngữ sự kiện chung | Các bên mô tả sản xuất, giao nhận, kiểm nghiệm, chuyển giao, thu hồi theo cấu trúc khác nhau.
+Lẫn lộn mức độ tin cậy | Dữ liệu tự khai, dữ liệu quan sát, dữ liệu đã xác minh và dữ liệu được chứng nhận có nguy cơ bị hiểu như nhau.
+Khó nhìn thị trường | Dữ liệu giá, tồn kho, lưu chuyển và cung-cầu thường thiếu coverage/methodology nên khó so sánh và tổng hợp.
+Rủi ro quyền truy cập | Nếu tập trung dữ liệu nhưng không có purpose/mandate/data-class controls, cơ quan hoặc người dùng có thể xem quá phạm vi cần thiết.
+Vòng đời bị đứt sau bán hàng | Nhiều hệ thống dừng ở giao dịch bán, chưa kết nối bảo hành, thu hồi, tái sử dụng, tái chế và vật liệu thứ cấp.
+Giai đoạn | Sự kiện điển hình | Dữ liệu quản lý
+Nguồn/đầu vào | SOURCE / PROCURE / RECEIVE | supplier, origin, input lot, quantity, evidence
+Sản xuất | CREATE / TRANSFORM / OBSERVE | process, BOM/recipe, input-output, yield
+Chất lượng | SAMPLE / TEST / INSPECT / HOLD / RELEASE | method, result, credential, disposition
+Logistics | PACK / SHIP / HANDOVER / RECEIVE | custody, route, condition, sensor
+Thương mại | TRANSFER / SELL / ACTIVATE | owner, channel, POS/order, price observation
+Dịch vụ | INSTALL / SERVICE / WARRANTY / REPAIR | asset state, parts, work order
+Thu hồi | INCIDENT / HOLD / RECALL / RETURN | affected scope, action, effectiveness
+Sau sử dụng | TAKE-BACK / REUSE / REFURBISH / RECYCLE | recovery, secondary material, circular lineage
+Lợi ích | Ý nghĩa
+Nâng cao năng lực quản lý dựa trên dữ liệu | Bổ sung khả năng quan sát theo ngành, địa bàn, chủ thể, sản phẩm, luồng hàng và thời gian trên dữ liệu tham gia/kết nối.
+Tăng tốc truy xuất và xử lý sự cố | Khoanh vùng nhanh hơn các node/item bị ảnh hưởng, hỗ trợ cảnh báo, hold, recall và theo dõi effectiveness.
+Hỗ trợ phòng chống gian lận | Danh tính số, event history và evidence tạo thêm cơ sở để phát hiện bất thường và kiểm tra tính nhất quán.
+Hỗ trợ hoạch định và điều tiết | Từng bước hình thành các chỉ báo cung-cầu, tồn kho, luồng hàng, năng lực sản xuất và phụ thuộc nguồn cung khi coverage phù hợp.
+Thúc đẩy kinh tế tuần hoàn | Theo dõi take-back, reuse, refurbish, recycle và lineage của vật liệu thứ cấp.
+Hỗ trợ hội nhập | Tạo điều kiện chuẩn hóa và trao đổi dữ liệu sản phẩm/chuỗi cung ứng, giảm rào cản dữ liệu khi thị trường yêu cầu minh bạch cao hơn.
+Tạo hạ tầng mở rộng đa ngành | Industry/Governance Packs cho phép mở ngành và địa phương bằng cấu hình thay vì xây lại lõi.
+Nhóm hệ thống | Dữ liệu kết nối điển hình
+ERP/MES/QMS/LIMS | product, BOM, production, QC, test
+WMS/TMS/IoT | inventory, shipment, custody, sensor
+POS/E-commerce/OMS | order, sales, return, price, stock
+CRM/Service/EAM | warranty, entitlement, asset maintenance
+CSDL chuyên ngành/cơ quan | registry, reference, status, credential theo thẩm quyền
+Lab/Certification | result, credential, revocation/status
+File/offline/mobile | CSV/XLSX/JSON/XML, offline event, field inspection
+Nhóm tiêu chí chọn pilot | Nội dung
+Dữ liệu | Có nguồn rõ, có khả năng đối soát, có owner/steward.
+Bài toán | Có nhu cầu truy xuất, quản lý chất lượng, recall, thị trường hoặc tuần hoàn cụ thể.
+Chủ thể | Có doanh nghiệp, cơ quan quản lý và bên dữ liệu sẵn sàng phối hợp.
+Pháp lý/quyền | Phạm vi chia sẻ và thẩm quyền có thể xác định rõ.
+Đo hiệu quả | Có KPI baseline và khả năng đo sau pilot.
+Khả năng nhân rộng | Mô hình có thể chuyển thành Industry/Governance Pack.
+Vai trò | Trách nhiệm tham chiếu
+Cơ quan chỉ đạo/điều phối | Chủ trương, phạm vi, ưu tiên, tháo gỡ liên cơ quan.
+Data Governance | Dictionary, taxonomy, KPI methodology, data ownership/stewardship.
+Đầu mối Bộ/ngành | Rule chuyên ngành, credential/status, mandate và use case.
+Đầu mối địa phương | Dữ liệu địa bàn, case, kiểm tra và phản hồi vận hành.
+Doanh nghiệp/đối tác dữ liệu | Source data, event/evidence, connector và chất lượng dữ liệu.
+Đơn vị nền tảng | GCI, core services, integration, security, monitoring và support.
+Nhóm mục tiêu | KPI tham chiếu
+Nắm sản phẩm/hàng hóa | % category/product coverage; duplicate rate; active product freshness
+Minh bạch cho người dân | scan success; % public fields có provenance; warning delivery
+Doanh nghiệp | trace completeness; automated event rate; reconciliation delta
+Quản lý Nhà nước | coverage; alert-to-case time; case SLA; recall scope time
+Quan sát thị trường | flow/price/inventory coverage; latency; anomaly precision
+Chất lượng/an toàn | test/evidence coverage; hold/recall effectiveness
+Kinh tế tuần hoàn | recovery rate; secondary material lineage coverage
+Công nghệ dữ liệu | connector success; data quality score; ingestion latency; incident/DR metrics
+AI/ML | groundedness/factuality, permission leakage test, model drift, prediction quality theo use case
+Rủi ro | Biện pháp kiểm soát
+Hiểu GOTRACE như hệ thống QR | Định vị rõ GCI + graph + event + evidence + government/market layer; QR chỉ là carrier.
+Tuyên bố “nắm toàn thị trường” khi coverage chưa đủ | Coverage-aware dashboard; wording “dữ liệu tham gia/được kết nối”; methodology/version.
+Cơ quan cấp trên xem quá mức dữ liệu | Mandate + purpose + data class + audit; aggregate-first; selective disclosure.
+Dữ liệu doanh nghiệp bị lộ | Field-level policy; privacy threshold; confidentiality; traceable export.
+Dữ liệu tự khai biến thành “đã xác minh” | Tách declared/observed/verified/certified; claim matrix; provenance.
+AI tạo kết luận vượt thẩm quyền | Policy-before-retrieval; nguồn/evidence; human-in-the-loop; không tự động tạo administrative decision.
+Blockchain bị dùng như nơi lưu mọi dữ liệu | Chỉ anchor hash/metadata cần thiết; payload off-chain; privacy/legal assessment.
+Khóa cứng vào nhà cung cấp công nghệ | API/event contract, adapter, versioning và portability.
+Pilot quá rộng, dữ liệu không đủ | Chọn use case nhỏ nhưng thật; exit criteria trước khi mở rộng.
+KPI không tái lập | Lưu formula, sources, coverage, query time và rule/KPI version.
+Từ/viết tắt | Tên tiếng Anh | Giải nghĩa tiếng Việt
+GCI | GOTRACE Canonical Identifier | Mã định danh chuẩn thống nhất của GOTRACE
+BRD | Business Requirements Document | Tài liệu yêu cầu nghiệp vụ
+API | Application Programming Interface | Giao diện lập trình ứng dụng
+AI | Artificial Intelligence | Trí tuệ nhân tạo
+GenAI | Generative Artificial Intelligence | Trí tuệ nhân tạo tạo sinh
+ML | Machine Learning | Máy học
+DLT | Distributed Ledger Technology | Công nghệ sổ cái phân tán
+Big Data | Big Data | Dữ liệu lớn
+Lakehouse | Data Lakehouse | Kiến trúc kết hợp hồ dữ liệu và kho dữ liệu
+Knowledge Graph | Knowledge Graph | Đồ thị tri thức
+Digital Twin | Digital Twin | Bản sao/trạng thái số của đối tượng
+IoT | Internet of Things | Internet vạn vật
+Edge Computing | Edge Computing | Điện toán biên
+RBAC | Role-Based Access Control | Kiểm soát truy cập theo vai trò
+ABAC | Attribute-Based Access Control | Kiểm soát truy cập theo thuộc tính
+IAM | Identity and Access Management | Quản lý danh tính và quyền truy cập
+KPI | Key Performance Indicator | Chỉ số đánh giá hiệu quả
+SLA | Service Level Agreement | Mức dịch vụ cam kết
+RPO | Recovery Point Objective | Mục tiêu điểm khôi phục dữ liệu
+RTO | Recovery Time Objective | Mục tiêu thời gian khôi phục
+ERP | Enterprise Resource Planning | Hoạch định nguồn lực doanh nghiệp
+MES | Manufacturing Execution System | Hệ thống điều hành sản xuất
+WMS | Warehouse Management System | Hệ thống quản lý kho
+TMS | Transportation Management System | Hệ thống quản lý vận tải
+QMS | Quality Management System | Hệ thống quản lý chất lượng
+LIMS | Laboratory Information Management System | Hệ thống quản lý thông tin phòng thí nghiệm
+POS | Point of Sale | Điểm bán/hệ thống bán hàng
+BOM | Bill of Materials | Định mức/cấu trúc vật tư, linh kiện
+MRO | Maintenance, Repair and Overhaul | Bảo trì, sửa chữa và đại tu
+UAV | Unmanned Aerial Vehicle | Phương tiện bay không người lái
+Coverage | Coverage | Độ bao phủ dữ liệu
+Provenance | Provenance | Nguồn gốc và lịch sử hình thành dữ liệu
+Evidence | Evidence | Bằng chứng nguồn
+Selective disclosure | Selective disclosure | Công bố dữ liệu có chọn lọc theo quyền/mục đích
+Traceback / Traceforward | Traceback / Traceforward | Truy ngược / truy xuôi
+Mã | Tiêu chí
+AC-01 | Universal Core mô hình hóa được nhiều Industry Pack mà không phá primitive lõi.
+AC-02 | Từ product class truy được lot/serial theo coverage và ngược lại.
+AC-03 | Từ một lot nguyên liệu traceforward tới output, shipment, điểm nhận và recall target.
+AC-04 | Dashboard Trung ương drill-down theo quyền từ quốc gia tới evidence.
+AC-05 | Dashboard Sở không xem ngoài địa bàn/ngành khi không có mandate bổ sung.
+AC-06 | KPI thị trường hiển thị coverage, freshness, source/methodology.
+AC-07 | Public scan không lộ restricted data nhưng phản ánh đúng warning/recall/status.
+AC-08 | Self-declared không hiển thị như authority-verified/certified.
+AC-09 | Ingest lặp không nhân đôi event/metric.
+AC-10 | Case phản ánh liên kết product/lot/place/evidence và chuyển cơ quan phù hợp.
+AC-11 | Recall cross-region xác định affected scope/action list không trùng.
+AC-15 | Dựng được trạng thái item, ownership, custody, credential tại query time quá khứ.
+AC-16 | Thay QR/RFID carrier không đổi GCI/identity.
+AC-17 | Regulator report có query timestamp, scope, sources, coverage, evidence refs và rule/KPI version.
+AC-TECH-01 | Evidence có thể kiểm chứng hash/lịch sử correction; nếu dùng blockchain không lộ payload restricted.
+AC-TECH-02 | AI Copilot không trả dữ liệu ngoài quyền và có evidence reference cho câu trả lời trọng yếu.
+AC-TECH-03 | Prediction ML hiển thị model/version/time/confidence và không bị hiểu như fact đã xác minh.
+AC-TECH-08 | Khôi phục workload trọng yếu đạt RPO/RTO theo service tier trong kiểm thử DR.

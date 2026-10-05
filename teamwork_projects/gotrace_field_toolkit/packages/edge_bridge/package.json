@@ -1,0 +1,29 @@
+{
+  "name": "@gotrace/edge-bridge",
+  "version": "1.0.0",
+  "description": "IoT Weighbridge Edge Bridge service connecting industrial scale indicators (Toledo, CAS, Yaohua) to GoTRACE",
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "bin": {
+    "weighbridge-sim": "src/simulator/cli.ts",
+    "edge-bridge": "src/cli.ts"
+  },
+  "scripts": {
+    "test": "node --experimental-strip-types --test tests/**/*.test.ts",
+    "typecheck": "/Users/mac/mekong\\ cli\\ lastest/GOTRACE/pmo-web-app/node_modules/typescript/bin/tsc --noEmit -p tsconfig.json"
+  },
+  "keywords": [
+    "gotrace",
+    "edge-bridge",
+    "weighbridge",
+    "rs232",
+    "toledo",
+    "cas",
+    "yaohua",
+    "jcs",
+    "sha256"
+  ],
+  "author": "GoTRACE Edge Engineering Team",
+  "license": "Apache-2.0"
+}

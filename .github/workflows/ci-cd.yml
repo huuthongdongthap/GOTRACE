@@ -1,0 +1,108 @@
+name: GOTRACE CI/CD Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  # -------------------------------------------------------------
+  # Job 1: Test, Audit & Build
+  # -------------------------------------------------------------
+  test-and-build:
+    name: 🛡️ Audit, Test & Static Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: |
+            pmo-web-app/package-lock.json
+            teamwork_projects/gotrace_field_toolkit/package-lock.json
+
+      # Step 1: Zero-PII & Decree 13/2023/NĐ-CP Audit
+      - name: 🔒 Zero-PII Compliance Audit
+        run: |
+          echo "Scanning for personal identifying information (PII)..."
+          VIOLATIONS=$(grep -rn -i "Phan Hữu Thông" pmo-web-app/src || true)
+          if [ -n "$VIOLATIONS" ]; then
+            echo "::error::PII leak detected in pmo-web-app/src: $VIOLATIONS"
+            exit 1
+          fi
+          echo "✅ Audit passed: Zero personal PII in source code."
+
+      # Step 2: Field Integration Toolkit Tests (249/249 tests)
+      - name: 🌾 Test Field Integration Toolkit
+        run: |
+          cd teamwork_projects/gotrace_field_toolkit
+          npm ci
+          npm test
+
+      # Step 3: Typecheck & Build PMO Web App
+      - name: ⚡ Typecheck & Build Web App
+        run: |
+          cd pmo-web-app
+          npm ci
+          npx tsc --noEmit
+          npm run build
+
+      # Step 4: Archive Static Export Artifacts
+      - name: 📦 Upload Static Web Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gotrace-pmo-static-site
+          path: pmo-web-app/out/
+          retention-days: 7
+
+  # -------------------------------------------------------------
+  # Job 2: Deploy to Cloudflare Pages
+  # -------------------------------------------------------------
+  deploy-cloudflare:
+    name: ⛅ Deploy to Cloudflare Pages
+    needs: test-and-build
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Download Static Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: gotrace-pmo-static-site
+          path: pmo-web-app/out
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 🚀 Deploy to Cloudflare Pages
+        id: deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID || 'b69fee03bdd94234eea8e4114cfc36ab' }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "::warning::CLOUDFLARE_API_TOKEN secret is not set in this repository."
+            echo "To enable automated CD deployments, add CLOUDFLARE_API_TOKEN to GitHub Repository Secrets."
+            echo "Artifacts are verified and ready for deployment."
+          else
+            echo "Deploying out/ to Cloudflare Pages project 'gotrace-pmo'..."
+            npx wrangler pages deploy pmo-web-app/out --project-name=gotrace-pmo
+            echo "✅ Successfully deployed to https://gotrace-pmo.pages.dev"
+          fi

@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2022", "DOM"],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "typeRoots": [
+      "/Users/mac/mekong cli lastest/GOTRACE/pmo-web-app/node_modules/@types"
+    ],
+    "types": ["node", "react", "react-dom"]
+  },
+  "include": [
+    "packages/edge_bridge/src/**/*",
+    "packages/edge_bridge/tests/**/*",
+    "packages/test_harness/src/**/*",
+    "packages/test_harness/tests/**/*"
+  ]
+}
+

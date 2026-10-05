@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom scrollbar for modern webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-slate-900 rounded-lg;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-700 rounded-lg hover:bg-slate-600 transition-colors;
+}
+
+::-webkit-scrollbar-corner {
+  @apply bg-slate-950;
+}
+
+/* Smooth scrolling behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Focus styles for accessibility */
+:focus-visible {
+  @apply outline-none ring-2 ring-emerald-500 ring-offset-2 ring-offset-slate-950;
+}
+
+/* Prevent text selection on interactive elements */
+.no-select {
+  @apply select-none;
+}
+
+/* Custom button press effect */
+button:active,
+a:active {
+  transform: scale(0.98);
+  transition: transform 100ms ease-out;
+}
+
+/* Card hover elevation */
+.card-hover {
+  @apply hover:border-slate-700 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200;
+}
+
+/* Input focus enhancement */
+.input-field {
+  @apply w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-white placeholder:text-slate-500
+         focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all duration-200;
+}
+
+/* Status badge variations */
+.status-badge {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border;
+}
+
+.status-done {
+  @apply bg-emerald-500/10 text-emerald-400 border-emerald-500/20;
+}
+
+.status-in-progress {
+  @apply bg-amber-500/10 text-amber-400 border-amber-500/20;
+}
+
+.status-pending {
+  @apply bg-slate-800 text-slate-400 border-slate-700;
+}
+
+.status-blocked {
+  @apply bg-rose-500/10 text-rose-400 border-rose-500/20;
+}
+
+/* Responsive typography adjustments */
+@media (max-width: 640px) {
+  .text-title-lg {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  .text-title-md {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+}
+
+/* Print styles for report generation */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --border-opacity: 1;
+    --muted-foreground-opacity: 1;
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

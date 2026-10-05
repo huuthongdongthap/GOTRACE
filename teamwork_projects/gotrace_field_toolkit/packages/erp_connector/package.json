@@ -1,0 +1,28 @@
+{
+  "name": "@gotrace/erp_connector",
+  "version": "1.0.0",
+  "description": "GoTRACE Two-Way ERP/WMS Connector API (Bravo 8, MISA AMIS, SAP S/4HANA)",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "pretest": "tsc",
+    "test": "node --test dist/tests/*.test.js",
+    "start": "node dist/src/index.js"
+  },
+  "keywords": [
+    "gotrace",
+    "erp",
+    "wms",
+    "bravo8",
+    "misa",
+    "sap",
+    "webhook",
+    "traceability",
+    "qr",
+    "zpl"
+  ],
+  "author": "GoTRACE Engineering Team",
+  "license": "Apache-2.0"
+}

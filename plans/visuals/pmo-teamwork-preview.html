@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GOTRACE — Trung tâm Điều hành & Teamwork PMO Tây Nam Bộ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Google+Sans+Text:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+
+  <style>
+    /* ═══════════════════════════════════════════════════════════════
+       MATERIAL DESIGN 3 (M3) — TONAL PALETTE & ELEVATION
+       Theme: Bách Khoa Tây Nam Bộ · Emerald AgriTech Dark Baseline
+       ═══════════════════════════════════════════════════════════════ */
+    :root {
+      /* M3 Primary */
+      --md-sys-color-primary: #55DC9E;
+      --md-sys-color-on-primary: #003822;
+      --md-sys-color-primary-container: #005234;
+      --md-sys-color-on-primary-container: #75F9B9;
+
+      /* M3 Secondary */
+      --md-sys-color-secondary: #85D5BA;
+      --md-sys-color-on-secondary: #003828;
+      --md-sys-color-secondary-container: #00513C;
+      --md-sys-color-on-secondary-container: #A1F2D5;
+
+      /* M3 Tertiary */
+      --md-sys-color-tertiary: #87CEFF;
+      --md-sys-color-on-tertiary: #00344D;
+      --md-sys-color-tertiary-container: #004C6E;
+      --md-sys-color-on-tertiary-container: #C8E6FF;
+
+      /* Alert / Highlights */
+      --md-sys-color-warning: #FFBA36;
+      --md-sys-color-error: #FFB4AB;
+      --md-sys-color-error-container: #93000A;
+
+      /* Surfaces */
+      --md-sys-color-background: #0B110F;
+      --md-sys-color-surface: #0B110F;
+      --md-sys-color-on-surface: #E0EBE4;
+      --md-sys-color-surface-variant: #3F4944;
+      --md-sys-color-on-surface-variant: #BFC9C2;
+      --md-sys-color-outline: #89938D;
+      --md-sys-color-outline-variant: #28342F;
+
+      /* Elevation Levels */
+      --md-sys-elevation-1: #121B17;
+      --md-sys-elevation-2: #17231E;
+      --md-sys-elevation-3: #1D2D26;
+
+      /* Shapes */
+      --md-shape-corner-s: 8px;
+      --md-shape-corner-m: 12px;
+      --md-shape-corner-l: 18px;
+      --md-shape-corner-xl: 26px;
+      --md-shape-corner-full: 9999px;
+
+      /* Shadows */
+      --shadow-1: 0 1px 3px rgba(0,0,0,0.3);
+      --shadow-2: 0 3px 8px rgba(0,0,0,0.35);
+      --shadow-3: 0 6px 16px rgba(0,0,0,0.4);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--md-sys-color-background);
+      color: var(--md-sys-color-on-surface);
+      font-family: 'Google Sans Text', 'Google Sans', -apple-system, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding: clamp(16px, 3vw, 36px);
+    }
+
+    .app-canvas {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    /* ─── HERO EXECUTIVE CARD ─── */
+    .hero-card {
+      background: linear-gradient(135deg, rgba(0, 82, 52, 0.45) 0%, rgba(18, 27, 23, 0.95) 100%), var(--md-sys-elevation-1);
+      border: 1px solid rgba(85, 220, 158, 0.25);
+      border-radius: var(--md-shape-corner-xl);
+      padding: clamp(24px, 4vw, 36px);
+      box-shadow: var(--shadow-2);
+    }
+
+    .top-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .m3-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: var(--md-sys-color-primary-container);
+      color: var(--md-sys-color-on-primary-container);
+      border-radius: var(--md-shape-corner-full);
+      font-family: 'Roboto Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .status-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--md-sys-color-primary);
+      box-shadow: 0 0 10px var(--md-sys-color-primary);
+    }
+
+    .hero-title {
+      font-family: 'Google Sans', sans-serif;
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 700;
+      line-height: 1.25;
+      color: #FFFFFF;
+      margin-bottom: 10px;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(14px, 1.3vw, 16px);
+      color: var(--md-sys-color-on-surface-variant);
+      max-width: 850px;
+      line-height: 1.5;
+    }
+
+    /* Founder Fastlane Cards */
+    .founder-fastlane {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .fastlane-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      background: rgba(255, 255, 255, 0.02);
+      padding: 12px 16px;
+      border-radius: var(--md-shape-corner-m);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .fastlane-icon {
+      color: var(--md-sys-color-primary);
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .fastlane-content h4 {
+      font-size: 13px;
+      font-weight: 700;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+
+    .fastlane-content p {
+      font-size: 12.5px;
+      color: var(--md-sys-color-on-surface-variant);
+      line-height: 1.4;
+    }
+
+    /* ─── TAB NAVIGATION ─── */
+    .tab-bar {
+      display: flex;
+      gap: 8px;
+      background: var(--md-sys-elevation-1);
+      padding: 6px;
+      border-radius: var(--md-shape-corner-full);
+      border: 1px solid var(--md-sys-color-outline-variant);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .tab-bar::-webkit-scrollbar { display: none; }
+
+    .m3-tab-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: var(--md-shape-corner-full);
+      border: none;
+      background: transparent;
+      color: var(--md-sys-color-on-surface-variant);
+      font-size: 13.5px;
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .m3-tab-btn .material-symbols-outlined { font-size: 18px; }
+
+    .m3-tab-btn:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: #FFF;
+    }
+
+    .m3-tab-btn.active {
+      background: var(--md-sys-color-primary);
+      color: var(--md-sys-color-on-primary);
+      font-weight: 700;
+    }
+
+    /* ─── SECTION STYLING ─── */
+    .m3-section {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .section-headline-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-pill-num {
+      width: 38px; height: 38px;
+      border-radius: var(--md-shape-corner-m);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Roboto Mono', monospace;
+      font-weight: 700;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+    .section-pill-num.c1 { background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); }
+    .section-pill-num.c2 { background: var(--md-sys-color-tertiary-container); color: var(--md-sys-color-on-tertiary-container); }
+    .section-pill-num.c3 { background: #3E1F58; color: #E7C3FF; }
+    .section-pill-num.c4 { background: #4E3400; color: #FFE08A; }
+
+    .section-title {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+
+    .section-desc {
+      font-size: 13.5px;
+      color: var(--md-sys-color-on-surface-variant);
+    }
+
+    .m3-card {
+      background: var(--md-sys-elevation-1);
+      border: 1px solid var(--md-sys-color-outline-variant);
+      border-radius: var(--md-shape-corner-xl);
+      padding: clamp(20px, 3vw, 28px);
+      box-shadow: var(--shadow-1);
+    }
+
+    /* ─── DIAGRAM PANEL (SIMPLIFIED & CLEAN) ─── */
+    .diagram-panel {
+      background: #080D0C;
+      border: 1px solid rgba(85, 220, 158, 0.12);
+      border-radius: var(--md-shape-corner-l);
+      padding: 20px 14px;
+      overflow-x: auto;
+      display: flex;
+      justify-content: center;
+    }
+    .mermaid { width: 100%; display: flex; justify-content: center; }
+    .mermaid svg { max-width: 100%; height: auto; }
+
+    /* ─── 5 ROLES CARDS ─── */
+    .role-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .role-card {
+      background: var(--md-sys-elevation-2);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--md-shape-corner-m);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .role-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .role-avatar {
+      width: 34px; height: 34px;
+      border-radius: var(--md-shape-corner-s);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--md-sys-color-primary-container);
+      color: var(--md-sys-color-primary);
+    }
+
+    .role-name { font-size: 14px; font-weight: 700; color: #FFF; }
+    .role-desc { font-size: 12.5px; color: var(--md-sys-color-on-surface-variant); line-height: 1.4; }
+    .role-kpi-chip {
+      margin-top: auto;
+      font-size: 11px;
+      font-family: 'Roboto Mono', monospace;
+      padding: 3px 8px;
+      border-radius: var(--md-shape-corner-full);
+      background: rgba(85, 220, 158, 0.1);
+      color: var(--md-sys-color-primary);
+      border: 1px solid rgba(85, 220, 158, 0.2);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       NEW: 4-CHẶNG CHUỖI CUNG ỨNG (THAY CHO SEQUENCE DÂY MƠ RỄ MÁ)
+       Rõ ràng, không chéo đường, Founder nhìn 10 giây là hiểu hết
+       ═══════════════════════════════════════════════════════════════ */
+    .chain-stream {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      position: relative;
+    }
+
+    .chain-node {
+      background: var(--md-sys-elevation-2);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--md-shape-corner-l);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+    }
+
+    .chain-node.active-stage {
+      border-color: rgba(85, 220, 158, 0.4);
+      background: linear-gradient(180deg, rgba(0, 82, 52, 0.15) 0%, var(--md-sys-elevation-2) 100%);
+    }
+
+    .chain-node.emergency-stage {
+      border-color: rgba(255, 180, 171, 0.4);
+      background: linear-gradient(180deg, rgba(147, 0, 10, 0.15) 0%, var(--md-sys-elevation-2) 100%);
+    }
+
+    .chain-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .chain-step-tag {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: var(--md-shape-corner-full);
+      background: var(--md-sys-color-primary-container);
+      color: var(--md-sys-color-primary);
+    }
+
+    .chain-node.emergency-stage .chain-step-tag {
+      background: var(--md-sys-color-error-container);
+      color: var(--md-sys-color-error);
+    }
+
+    .chain-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #FFF;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .chain-action-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12.5px;
+    }
+
+    .chain-action-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      color: var(--md-sys-color-on-surface-variant);
+      line-height: 1.35;
+    }
+
+    .chain-action-list li .bullet {
+      color: var(--md-sys-color-primary);
+      font-weight: bold;
+    }
+
+    .chain-node.emergency-stage .chain-action-list li .bullet {
+      color: var(--md-sys-color-error);
+    }
+
+    .chain-data-pill {
+      margin-top: auto;
+      padding: 8px 10px;
+      border-radius: var(--md-shape-corner-s);
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px dashed rgba(255, 255, 255, 0.1);
+      font-family: 'Roboto Mono', monospace;
+      font-size: 11px;
+      color: #A1F2D5;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .chain-node.emergency-stage .chain-data-pill {
+      color: var(--md-sys-color-error);
+    }
+
+    /* ─── SO SÁNH CÁCH CŨ VS GOTRACE ─── */
+    .compare-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 18px;
+    }
+    @media (min-width: 768px) {
+      .compare-container { grid-template-columns: 1fr 1fr; }
+    }
+
+    .compare-box {
+      border-radius: var(--md-shape-corner-l);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .compare-box.old {
+      background: rgba(147, 0, 10, 0.12);
+      border: 1px solid rgba(255, 180, 171, 0.25);
+    }
+    .compare-box.new {
+      background: rgba(0, 82, 52, 0.25);
+      border: 1px solid rgba(85, 220, 158, 0.35);
+    }
+
+    .compare-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14.5px;
+      font-weight: 700;
+    }
+    .compare-box.old .compare-title { color: var(--md-sys-color-error); }
+    .compare-box.new .compare-title { color: var(--md-sys-color-primary); }
+
+    .compare-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .compare-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      color: var(--md-sys-color-on-surface-variant);
+    }
+
+    /* ─── STEPPER PHỄU 11 BƯỚC ─── */
+    .stepper-phases {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 16px;
+    }
+    @media (min-width: 900px) {
+      .stepper-phases { grid-template-columns: 1fr 1.15fr 1fr; }
+    }
+
+    .phase-column {
+      background: var(--md-sys-elevation-2);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--md-shape-corner-l);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .phase-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 8px;
+    }
+
+    .phase-header h4 { font-size: 13.5px; font-weight: 700; color: #FFF; }
+
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: var(--md-shape-corner-s);
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .step-item.highlight {
+      background: var(--md-sys-color-primary-container);
+      border-color: var(--md-sys-color-primary);
+    }
+
+    .step-idx {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--md-sys-color-primary);
+      background: rgba(0,0,0,0.3);
+      padding: 2px 5px;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    .step-item.highlight .step-idx {
+      color: #FFF;
+      background: var(--md-sys-color-primary);
+    }
+
+    .step-text {
+      font-size: 12.5px;
+      color: var(--md-sys-color-on-surface);
+      line-height: 1.35;
+    }
+    .step-text small {
+      display: block;
+      color: var(--md-sys-color-on-surface-variant);
+      font-size: 11px;
+      margin-top: 2px;
+    }
+
+    /* ─── 3 PILLARS ─── */
+    .pillar-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    @media (min-width: 768px) {
+      .pillar-row { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .pillar-m3-card {
+      background: var(--md-sys-elevation-2);
+      border-radius: var(--md-shape-corner-l);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      border: 1px solid var(--md-sys-color-outline-variant);
+    }
+
+    .pillar-badge-num {
+      width: 40px; height: 40px;
+      border-radius: var(--md-shape-corner-s);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 15px;
+    }
+    .pillar-badge-num.n1 { background: var(--md-sys-color-primary-container); color: var(--md-sys-color-primary); }
+    .pillar-badge-num.n2 { background: var(--md-sys-color-tertiary-container); color: var(--md-sys-color-tertiary); }
+    .pillar-badge-num.n3 { background: #3E1F58; color: #E7C3FF; }
+
+    /* ─── FOOTER ─── */
+    .m3-footer {
+      border-top: 1px solid var(--md-sys-color-outline-variant);
+      padding-top: 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      color: var(--md-sys-color-outline);
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-canvas">
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         EXECUTIVE HERO CARD (DÀNH CHO FOUNDER & BAN ĐIỀU HÀNH)
+         ═══════════════════════════════════════════════════════════════ -->
+    <header class="hero-card">
+      <div class="top-meta-row">
+        <div class="m3-badge">
+          <span class="status-dot"></span>
+          GOTRACE MEKONG PMO · EXECUTIVE BOARD PREVIEW
+        </div>
+        <div style="display:flex; align-items:center; gap:6px;">
+          <span class="material-symbols-outlined" style="color:var(--md-sys-color-primary); font-size:18px;">location_on</span>
+          <span style="font-family:'Roboto Mono', monospace; font-size:12px; color:var(--md-sys-color-on-surface-variant);">
+            Trụ sở Tác nghiệp: TP. Sa Đéc, Tỉnh Đồng Tháp
+          </span>
+        </div>
+      </div>
+
+      <h1 class="hero-title">
+        Sơ đồ Điều hành &amp; Tác chiến Teamwork PMO Tây Nam Bộ
+      </h1>
+      <p class="hero-subtitle">
+        Hạ tầng dữ liệu chuỗi cung ứng thực phẩm &amp; truy xuất liên ngành (Long An → Đồng Tháp → Cà Mau). 
+        Kiến tạo mạng lưới dữ liệu bất biến (4-Tier Trust) bảo vệ người tiêu dùng và hỗ trợ doanh nghiệp xuất khẩu.
+      </p>
+
+      <!-- 4 Trụ cột Founder nhìn vào hiểu ngay -->
+      <div class="founder-fastlane">
+        <div class="fastlane-item">
+          <span class="material-symbols-outlined fastlane-icon">gavel</span>
+          <div class="fastlane-content">
+            <h4>Bảo trợ Pháp lý &amp; B2G</h4>
+            <p>Hội đồng Quản trị ZAM ủy quyền pháp nhân trực tiếp cho PMO Sa Đéc ký kết với Sở NN, Chi cục ATVSTP, GD&amp;ĐT.</p>
+          </div>
+        </div>
+
+        <div class="fastlane-item">
+          <span class="material-symbols-outlined fastlane-icon">timelapse</span>
+          <div class="fastlane-content">
+            <h4>Phản ứng Sự cố &lt;15 Phút</h4>
+            <p>Thay vì 3–7 ngày điều tra thủ công, GOTRACE trace ngược nguồn mẻ nguyên liệu và chặn ngay các điểm đến tiếp theo.</p>
+          </div>
+        </div>
+
+        <div class="fastlane-item">
+          <span class="material-symbols-outlined fastlane-icon">conversion_path</span>
+          <div class="fastlane-content">
+            <h4>Phễu Bán hàng 11 Bước</h4>
+            <p>Cú đánh mở cửa là "Chẩn đoán Dữ liệu Chuỗi (2-4 tuần)" giải quyết nỗi sợ ngộ độc và nguy cơ đình chỉ mã vùng trồng.</p>
+          </div>
+        </div>
+
+        <div class="fastlane-item">
+          <span class="material-symbols-outlined fastlane-icon">verified_user</span>
+          <div class="fastlane-content">
+            <h4>Tuân thủ QĐ 1246/QĐ-BYT</h4>
+            <p>Số hóa trọn vẹn Quy trình Kiểm thực Ba bước và Lưu mẫu thức ăn 24h, bảo vệ pháp lý trực tiếp cho Hiệu trưởng / Giám đốc KCN.</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         M3 SEGMENTED FILTER BAR
+         ═══════════════════════════════════════════════════════════════ -->
+    <nav class="tab-bar" aria-label="Bộ chuyển đổi chuyên mục">
+      <button class="m3-tab-btn active" onclick="scrollToSection('sec-org')">
+        <span class="material-symbols-outlined">corporate_fare</span>
+        1. Cơ cấu Phân quyền PMO
+      </button>
+      <button class="m3-tab-btn" onclick="scrollToSection('sec-flow')">
+        <span class="material-symbols-outlined">schema</span>
+        2. Chuỗi Vận hành 4 Chặng
+      </button>
+      <button class="m3-tab-btn" onclick="scrollToSection('sec-sales')">
+        <span class="material-symbols-outlined">leaderboard</span>
+        3. Phễu Bán hàng 11 Bước
+      </button>
+      <button class="m3-tab-btn" onclick="scrollToSection('sec-pull')">
+        <span class="material-symbols-outlined">hub</span>
+        4. Mô hình 3 Lực kéo Thị trường
+      </button>
+    </nav>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         PHẦN 1: CƠ CẤU PHÂN QUYỀN & 5 VỊ TRÍ NÒNG CỐT
+         ═══════════════════════════════════════════════════════════════ -->
+    <section id="sec-org" class="m3-section">
+      <div class="section-headline-group">
+        <div class="section-pill-num c1">01</div>
+        <div>
+          <h2 class="section-title">Cơ cấu Phân quyền &amp; Điều hành Teamwork PMO Sa Đéc</h2>
+          <p class="section-desc">Mối quan hệ ủy quyền pháp lý gọn gàng từ HĐQT ZAM Việt Nam tới căn cứ thực địa và phân công 5 vị trí nòng cốt.</p>
+        </div>
+      </div>
+
+      <div class="m3-card">
+        <!-- Clean Diagram: Rõ ràng, không đường chéo thừa -->
+        <div class="diagram-panel">
+          <pre class="mermaid">
+flowchart TD
+    HQ["🏛️ HỘI ĐỒNG QUẢN TRỊ / TỔNG GIÁM ĐỐC\nCÔNG TY CP TƯ VẤN VÀ CÔNG NGHỆ ZAM VIỆT NAM"]
+    
+    HQ -->|"Ủy quyền Pháp lý Toàn quyền"| PMO["★ PMO TÂY NAM BỘ\n(Căn cứ tác nghiệp: TP. Sa Đéc, Đồng Tháp)"]
+
+    PMO --> C1["⚙️ TECH LEAD\nBackend API · GCI Engine"]
+    PMO --> C2["💼 BIZDEV LEAD\nAnchor Accounts · B2B Client"]
+    PMO --> C3["🎬 MEDIA LEAD\nVideo 4K · Storytelling"]
+    PMO --> C4["📑 DATA STEWARD\nTaxonomy · Data Trust"]
+    PMO --> C5["🛵 FIELD WORKERS\nQuét mã · Kiểm thực 3 bước"]
+
+    PMO -.->|"Hợp tác & Mở rộng"| EXT["ĐỐI TÁC THỰC ĐỊA: Anchor Doanh nghiệp (Tinh Bột Xanh, Bích Chi) · Cơ quan B2G · Phụ huynh"]
+
+    style HQ fill:#00344D,stroke:#87CEFF,stroke-width:2px,color:#C8E6FF
+    style PMO fill:#005234,stroke:#55DC9E,stroke-width:2px,color:#75F9B9
+    style EXT fill:#121B17,stroke:#3F4944,stroke-dasharray: 4 4,color:#BFC9C2
+    style C1 fill:#17231E,stroke:#3F4944,color:#E0EBE4
+    style C2 fill:#17231E,stroke:#3F4944,color:#E0EBE4
+    style C3 fill:#17231E,stroke:#3F4944,color:#E0EBE4
+    style C4 fill:#17231E,stroke:#3F4944,color:#E0EBE4
+    style C5 fill:#17231E,stroke:#3F4944,color:#E0EBE4
+          </pre>
+        </div>
+
+        <!-- 5 Vai trò thẻ trực quan M3 -->
+        <h3 style="font-size:15px; font-weight:700; color:#FFF; margin-top:20px; margin-bottom:4px;">
+          Bản đồ Trách nhiệm &amp; KPI Quyết định của 5 Vị trí Thực địa:
+        </h3>
+        <div class="role-grid">
+          <div class="role-card">
+            <div class="role-header">
+              <div class="role-avatar"><span class="material-symbols-outlined">terminal</span></div>
+              <div class="role-name">Tech Lead</div>
+            </div>
+            <p class="role-desc">Vận hành GCI Engine, Cloud Gateway, kết nối API cân điện tử và bảo đảm Uptime hệ thống.</p>
+            <div class="role-kpi-chip">KPI: Uptime 99.9% · Sync &lt;2s</div>
+          </div>
+
+          <div class="role-card">
+            <div class="role-header">
+              <div class="role-avatar" style="background:#004C6E; color:#87CEFF;"><span class="material-symbols-outlined">handshake</span></div>
+              <div class="role-name">BizDev Lead</div>
+            </div>
+            <p class="role-desc">Tiếp cận Anchor Accounts (Cỏ May, Tinh Bột Xanh, Bích Chi) và chốt hợp đồng Diagnostic.</p>
+            <div class="role-kpi-chip" style="background:rgba(135,206,255,0.15); color:#87CEFF; border-color:rgba(135,206,255,0.3);">KPI: ≥2 Anchor/Quý · 10 HTX</div>
+          </div>
+
+          <div class="role-card">
+            <div class="role-header">
+              <div class="role-avatar" style="background:#4E3400; color:#FFBA36;"><span class="material-symbols-outlined">videocam</span></div>
+              <div class="role-name">Media Lead</div>
+            </div>
+            <p class="role-desc">Tư liệu hóa câu chuyện làng nghề Bột Sa Đéc, quay video 4K xác thực mẻ hàng làm minh chứng.</p>
+            <div class="role-kpi-chip" style="background:rgba(255,186,54,0.15); color:#FFBA36; border-color:rgba(255,186,54,0.3);">KPI: 100% Case Study có Video</div>
+          </div>
+
+          <div class="role-card">
+            <div class="role-header">
+              <div class="role-avatar" style="background:#3E1F58; color:#CE93D8;"><span class="material-symbols-outlined">verified</span></div>
+              <div class="role-name">Data Steward</div>
+            </div>
+            <p class="role-desc">Kiểm soát tính toàn vẹn 4-Tier Trust, chuẩn hóa mã GCI, ngăn chặn rác dữ liệu từ đầu nguồn.</p>
+            <div class="role-kpi-chip" style="background:rgba(206,147,216,0.15); color:#CE93D8; border-color:rgba(206,147,216,0.3);">KPI: Data Error Rate &lt;0.5%</div>
+          </div>
+
+          <div class="role-card">
+            <div class="role-header">
+              <div class="role-avatar"><span class="material-symbols-outlined">moped</span></div>
+              <div class="role-name">Field Workers</div>
+            </div>
+            <p class="role-desc">Cắm chốt tại HTX &amp; Bếp ăn bán trú. Cầm điện thoại hướng dẫn quét mã, chụp ảnh kiểm thực 3 bước.</p>
+            <div class="role-kpi-chip">KPI: Hỗ trợ 100% mẻ giao nhận</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         PHẦN 2: CHUỖI CUNG ỨNG 4 CHẶNG TRỰC QUAN (KHÔNG DÂY MƠ RỄ MÁ)
+         ═══════════════════════════════════════════════════════════════ -->
+    <section id="sec-flow" class="m3-section">
+      <div class="section-headline-group">
+        <div class="section-pill-num c2">02</div>
+        <div>
+          <h2 class="section-title">Luồng Vận hành Chuỗi: Bột Sa Đéc → Bếp ăn Học đường</h2>
+          <p class="section-desc">Mô hình hóa chuỗi giá trị 4 chặng mạch lạc, loại bỏ hoàn toàn các đường giao cắt rối mắt.</p>
+        </div>
+      </div>
+
+      <div class="m3-card">
+        <!-- 4 Chặng tinh gọn dễ hiểu -->
+        <div class="chain-stream">
+          <!-- Chặng 1 -->
+          <div class="chain-node active-stage">
+            <div class="chain-header">
+              <span class="chain-step-tag">CHẶNG 1</span>
+              <span class="material-symbols-outlined" style="color:var(--md-sys-color-primary);">agriculture</span>
+            </div>
+            <div class="chain-title">Nguồn Bột Sa Đéc</div>
+            <ul class="chain-action-list">
+              <li><span class="bullet">▸</span> <strong>HTX Bột Sa Đéc:</strong> Cân điện tử, xuất mẻ bột ướt (ITEM:LOT).</li>
+              <li><span class="bullet">▸</span> <strong>Quatest 3 / Lab:</strong> Tải kết quả xét nghiệm vi sinh (EVIDENCE: SHA-256 Hash).</li>
+            </ul>
+            <div class="chain-data-pill">
+              <span class="material-symbols-outlined" style="font-size:14px;">check_circle</span>
+              Dữ liệu: GCI Lot ID + Hash Vi sinh
+            </div>
+          </div>
+
+          <!-- Chặng 2 -->
+          <div class="chain-node">
+            <div class="chain-header">
+              <span class="chain-step-tag">CHẶNG 2</span>
+              <span class="material-symbols-outlined" style="color:#87CEFF;">precision_manufacturing</span>
+            </div>
+            <div class="chain-title">Xưởng Chế Biến</div>
+            <ul class="chain-action-list">
+              <li><span class="bullet">▸</span> <strong>Tinh Bột Xanh:</strong> Quét nhận mẻ bột (EVENT:Receiving).</li>
+              <li><span class="bullet">▸</span> <strong>Tráng bánh / Cắt sợi:</strong> Đóng khay sợi bánh canh tươi, in dán mã GOTRACE QR.</li>
+            </ul>
+            <div class="chain-data-pill">
+              <span class="material-symbols-outlined" style="font-size:14px;">qr_code_2</span>
+              Dữ liệu: Mã QR khay sợi tươi thành phẩm
+            </div>
+          </div>
+
+          <!-- Chặng 3 -->
+          <div class="chain-node active-stage">
+            <div class="chain-header">
+              <span class="chain-step-tag">CHẶNG 3 · QĐ 1246</span>
+              <span class="material-symbols-outlined" style="color:var(--md-sys-color-primary);">soup_kitchen</span>
+            </div>
+            <div class="chain-title">Bếp Ăn Trường Học</div>
+            <ul class="chain-action-list">
+              <li><span class="bullet">1.</span> <strong>Bước 1:</strong> Quét nhận khay sợi tươi + chụp ảnh bao bì.</li>
+              <li><span class="bullet">2.</span> <strong>Bước 2:</strong> Đo và ghi nhận nhiệt độ nấu chín (>100°C).</li>
+              <li><span class="bullet">3.</span> <strong>Bước 3:</strong> Lưu mẫu thức ăn 24h vào tủ lạnh niêm phong.</li>
+            </ul>
+            <div class="chain-data-pill">
+              <span class="material-symbols-outlined" style="font-size:14px;">shield</span>
+              Tuân thủ: Biên bản Kiểm thực 3 Bước Số
+            </div>
+          </div>
+
+          <!-- Chặng 4 -->
+          <div class="chain-node emergency-stage">
+            <div class="chain-header">
+              <span class="chain-step-tag">CHẶNG 4 · GIÁM SÁT</span>
+              <span class="material-symbols-outlined" style="color:var(--md-sys-color-error);">notifications_active</span>
+            </div>
+            <div class="chain-title" style="color:#FFB4AB;">Truy Vết &amp; Cảnh Báo</div>
+            <ul class="chain-action-list">
+              <li><span class="bullet">▸</span> <strong>Phụ huynh học sinh:</strong> Quét mã QR xem thực đơn và xuất xứ gạo/bột.</li>
+              <li><span class="bullet">▸</span> <strong>Khi có nghi ngờ (&lt;15 phút):</strong> Chi cục ATVSTP gõ mã lô bột → GOTRACE lập tức khóa &amp; cảnh báo tất cả các trường khác cùng nhận lô đó!</li>
+            </ul>
+            <div class="chain-data-pill">
+              <span class="material-symbols-outlined" style="font-size:14px;">speed</span>
+              Khóa rủi ro liên trường: &lt;15 phút
+            </div>
+          </div>
+        </div>
+
+        <!-- So sánh trước và sau khi có GOTRACE -->
+        <div class="compare-container">
+          <div class="compare-box old">
+            <div class="compare-title">
+              <span class="material-symbols-outlined">cancel</span>
+              Cách Làm Truyền Thống (Sổ Giấy)
+            </div>
+            <ul class="compare-list">
+              <li><span>❌</span> Ghi chép sổ 3 bước kiểm thực bằng bút mực, dễ tẩy xóa hoặc ghi lụi sau giờ ăn.</li>
+              <li><span>❌</span> Mất từ 3–7 ngày khi có sự cố để tìm lại ai giao thịt, ai giao bột lúc nào.</li>
+              <li><span>❌</span> Không chứng minh được mẫu thức ăn lưu trong tủ lạnh là đúng của bữa ăn hôm đó.</li>
+              <li><span>❌</span> Hiệu trưởng và bếp trưởng chịu hoàn toàn trách nhiệm hình sự khi có rủi ro.</li>
+            </ul>
+          </div>
+
+          <div class="compare-box new">
+            <div class="compare-title">
+              <span class="material-symbols-outlined">check_circle</span>
+              Giải Pháp GOTRACE Số Hóa
+            </div>
+            <ul class="compare-list">
+              <li><span>✅</span> Bấm chụp ảnh niêm phong + đo nhiệt độ trực tiếp trên Mobile App, hash dấu thời gian.</li>
+              <li><span>✅</span> Phản ứng sự cố dưới 15 phút: Biết ngay mẻ bột đến từ đâu, còn trường nào đang nấu.</li>
+              <li><span>✅</span> Bằng chứng bất biến (Tier 3-4 Trust) bảo vệ danh dự và pháp lý nhà trường.</li>
+              <li><span>✅</span> Phụ huynh quét mã an tâm tuyệt đối, nâng tầm thương hiệu nhà trường và bếp ăn.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         PHẦN 3: PHỄU BÁN HÀNG B2B 11 BƯỚC CHO ANCHOR ENTERPRISE
+         ═══════════════════════════════════════════════════════════════ -->
+    <section id="sec-sales" class="m3-section">
+      <div class="section-headline-group">
+        <div class="section-pill-num c3">03</div>
+        <div>
+          <h2 class="section-title">Phễu Bán hàng &amp; Tiếp cận Anchor Enterprise (11 Bước)</h2>
+          <p class="section-desc">Chiến thuật "Cú đánh nhập môn": Bắt đầu bằng Chẩn đoán Dữ liệu Chuỗi Cung ứng (Diagnostic) tính phí, sau đó chuyển thành Pilot 90 ngày và ký Hợp đồng SLA dài hạn.</p>
+        </div>
+      </div>
+
+      <div class="m3-card">
+        <!-- Clean linear flowchart: không vướng mắt -->
+        <div class="diagram-panel">
+          <pre class="mermaid">
+flowchart LR
+    S1["1. Market\nMapping"] --> S2["2. Account\nQualify"]
+    S2 --> S3["3. Executive\nDiscovery"]
+    S3 --> S4["★ 4. Data Diagnostic\n(2–4 Tuần)"]
+    S4 --> S5["5. Traceability\nProof Test"]
+    S5 --> S6["★ 6. Pilot Thực tế\n(90 Ngày)"]
+    S6 --> S7["7. Business Case\nĐo lường ROI"]
+    S7 --> S8["★ 8. Ký Hợp đồng\nSLA Dài hạn"]
+    S8 --> S9["9. Mở rộng toàn bộ\nNhà cung cấp"]
+    S9 --> S10["10. Mạng lưới\nLiên tỉnh"]
+    S10 --> S11["11. Hạ tầng Dữ liệu\nQuốc gia"]
+
+    style S4 fill:#005234,stroke:#55DC9E,stroke-width:2px,color:#75F9B9
+    style S6 fill:#004C6E,stroke:#87CEFF,stroke-width:2px,color:#C8E6FF
+    style S8 fill:#4A148C,stroke:#CE93D8,stroke-width:2px,color:#F3E5F5
+    style S1 fill:#17231E,stroke:#28342F,color:#BFC9C2
+    style S2 fill:#17231E,stroke:#28342F,color:#BFC9C2
+    style S3 fill:#17231E,stroke:#28342F,color:#BFC9C2
+    style S5 fill:#17231E,stroke:#28342F,color:#BFC9C2
+    style S7 fill:#17231E,stroke:#28342F,color:#BFC9C2
+    style S9 fill:#17231E,stroke:#28342F,color:#BFC9C2
+    style S10 fill:#17231E,stroke:#28342F,color:#BFC9C2
+    style S11 fill:#17231E,stroke:#28342F,color:#BFC9C2
+          </pre>
+        </div>
+
+        <!-- 3 Giai đoạn cốt lõi của phễu (Stepper View cho Founder) -->
+        <div class="stepper-phases">
+          <!-- Pha 1 -->
+          <div class="phase-column">
+            <div class="phase-header">
+              <h4>GIAI ĐOẠN I: TIẾP CẬN</h4>
+              <span class="m3-badge" style="font-size:10px; padding:2px 8px;">Bước 1 → 4</span>
+            </div>
+            <div class="step-item">
+              <span class="step-idx">01</span>
+              <div class="step-text"><strong>Market Mapping:</strong> Quét 100 Anchor gạo, xoài, bột Sa Đéc tại ĐBSCL.</div>
+            </div>
+            <div class="step-item">
+              <span class="step-idx">02</span>
+              <div class="step-text"><strong>Account Qualification:</strong> Chấm điểm NVS ≥70 (Reach, Pain, Data Criticality).</div>
+            </div>
+            <div class="step-item">
+              <span class="step-idx">03</span>
+              <div class="step-text"><strong>Executive Discovery:</strong> Gặp Tổng Giám Đốc đào sâu nỗi sợ bị hold hàng ở cảng.</div>
+            </div>
+            <div class="step-item highlight">
+              <span class="step-idx">★ 04</span>
+              <div class="step-text">
+                <strong>Data Diagnostic (Cú đánh nhập môn):</strong>
+                <small>Khảo sát chuỗi 2–4 tuần (thu phí 30–50 triệu VND) để chứng minh lỗ hổng dữ liệu hiện tại.</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pha 2 -->
+          <div class="phase-column">
+            <div class="phase-header">
+              <h4>GIAI ĐOẠN II: THÍ ĐIỂM</h4>
+              <span class="m3-badge" style="font-size:10px; padding:2px 8px; background:#004C6E; color:#C8E6FF;">Bước 5 → 8</span>
+            </div>
+            <div class="step-item">
+              <span class="step-idx">05</span>
+              <div class="step-text"><strong>Traceability Proof:</strong> Demo truy vết ngược 1 lô xuất khẩu thực tế trong 5 phút.</div>
+            </div>
+            <div class="step-item highlight" style="background:#004C6E; border-color:#87CEFF;">
+              <span class="step-idx" style="background:#87CEFF; color:#00344D;">★ 06</span>
+              <div class="step-text">
+                <strong>Pilot 90 Ngày:</strong>
+                <small>Chạy thực địa tại 1 nhà máy + 5 HTX cung cấp nguyên liệu lúa gạo hoặc mẻ bột.</small>
+              </div>
+            </div>
+            <div class="step-item">
+              <span class="step-idx">07</span>
+              <div class="step-text"><strong>Business Case ROI:</strong> Báo cáo giảm 85% thời gian đối soát, không bị GACC phạt.</div>
+            </div>
+            <div class="step-item highlight" style="background:#3E1F58; border-color:#CE93D8;">
+              <span class="step-idx" style="background:#CE93D8; color:#3E1F58;">★ 08</span>
+              <div class="step-text">
+                <strong>Ký Hợp đồng SLA:</strong>
+                <small>Ký gói dịch vụ hạ tầng SaaS dài hạn theo năm với Anchor Enterprise.</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pha 3 -->
+          <div class="phase-column">
+            <div class="phase-header">
+              <h4>GIAI ĐOẠN III: MẠNG LƯỚI</h4>
+              <span class="m3-badge" style="font-size:10px; padding:2px 8px; background:#4E3400; color:#FFDEA0;">Bước 9 → 11</span>
+            </div>
+            <div class="step-item">
+              <span class="step-idx">09</span>
+              <div class="step-text"><strong>Mở rộng Vệ tinh:</strong> Kéo toàn bộ 30–50 nông hộ, HTX trong chuỗi vào chung 1 graph.</div>
+            </div>
+            <div class="step-item">
+              <span class="step-idx">10</span>
+              <div class="step-text"><strong>Mạng lưới Liên tỉnh:</strong> Mở rộng Đồng Tháp → An Giang → Cần Thơ → Tiền Giang.</div>
+            </div>
+            <div class="step-item">
+              <span class="step-idx">11</span>
+              <div class="step-text"><strong>Hạ tầng Quốc gia:</strong> Trở thành Data Layer nuôi dữ liệu cho traceviet và Cổng Quốc gia.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         PHẦN 4: 3 LỰC KÉO THỊ TRƯỜNG (THREE-PILLAR PULL)
+         ═══════════════════════════════════════════════════════════════ -->
+    <section id="sec-pull" class="m3-section">
+      <div class="section-headline-group">
+        <div class="section-pill-num c4">04</div>
+        <div>
+          <h2 class="section-title">Mô hình 3 Lực kéo Thị trường (Three-Pillar Pull)</h2>
+          <p class="section-desc">Cơ chế phối hợp công - tư sinh ra lực hấp dẫn tự nhiên bắt buộc toàn bộ chuỗi nông sản Mekong phải tích hợp GOTRACE.</p>
+        </div>
+      </div>
+
+      <div class="pillar-row">
+        <!-- Pillar 1 -->
+        <div class="pillar-m3-card">
+          <div class="pillar-badge-num n1">01</div>
+          <h3 style="font-size:17px; font-weight:700; color:#FFF;">Government Pull</h3>
+          <p style="font-size:13px; color:var(--md-sys-color-on-surface-variant); line-height:1.5;">
+            Quyết định 1246/QĐ-BYT, Nghị định 37/2026 và Đề án 100/QĐ-TTg siết chặt an toàn thực phẩm. Cơ quan Nhà nước (Chi cục ATVSTP, Sở Y tế) là lực kéo chuẩn dữ liệu bắt buộc đối với mọi bếp ăn tập thể và trường học.
+          </p>
+          <div style="margin-top:auto; padding-top:12px; border-top:1px solid rgba(255,255,255,0.06);">
+            <span style="font-size:11px; font-family:'Roboto Mono',monospace; color:var(--md-sys-color-primary);">
+              Pháp lý · Trách nhiệm Hình sự · Thanh tra
+            </span>
+          </div>
+        </div>
+
+        <!-- Pillar 2 -->
+        <div class="pillar-m3-card">
+          <div class="pillar-badge-num n2">02</div>
+          <h3 style="font-size:17px; font-weight:700; color:#FFF;">Enterprise Pull</h3>
+          <p style="font-size:13px; color:var(--md-sys-color-on-surface-variant); line-height:1.5;">
+            Các đầu tàu như Tinh Bột Xanh, Bích Chi, Cỏ May cần kiểm soát rủi ro Cadmium, Auramine O và đáp ứng Lệnh 280 GACC để xuất khẩu qua Trung Quốc, Châu Âu, Mỹ. Họ dùng quyền lực mua hàng để kéo hàng trăm HTX vào GOTRACE.
+          </p>
+          <div style="margin-top:auto; padding-top:12px; border-top:1px solid rgba(255,255,255,0.06);">
+            <span style="font-size:11px; font-family:'Roboto Mono',monospace; color:var(--md-sys-color-tertiary);">
+              Anchor Accounts · Quyền lực Thu mua
+            </span>
+          </div>
+        </div>
+
+        <!-- Pillar 3 -->
+        <div class="pillar-m3-card">
+          <div class="pillar-badge-num n3">03</div>
+          <h3 style="font-size:17px; font-weight:700; color:#FFF;">Network Enablement</h3>
+          <p style="font-size:13px; color:var(--md-sys-color-on-surface-variant); line-height:1.5;">
+            Dữ liệu một khi đã nhập từ vựa bột/cánh đồng sẽ được tái sử dụng đa mục đích: Vừa cấp chứng từ kiểm thực bếp ăn, vừa làm hồ sơ hải quan xuất khẩu, vừa tích hợp tín chỉ carbon MRV Đề án 1 Triệu Hecta lúa. Chi phí cận biên giảm về ~0.
+          </p>
+          <div style="margin-top:auto; padding-top:12px; border-top:1px solid rgba(255,255,255,0.06);">
+            <span style="font-size:11px; font-family:'Roboto Mono',monospace; color:#CE93D8;">
+              Hiệu ứng Mạng · Đề án 1Mha Lúa · Data Moat
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         FOOTER
+         ═══════════════════════════════════════════════════════════════ -->
+    <footer class="m3-footer">
+      <div style="font-weight:700; color:var(--md-sys-color-on-surface);">
+        GOTRACE — CÔNG TY CỔ PHẦN TƯ VẤN VÀ CÔNG NGHỆ ZAM VIỆT NAM
+      </div>
+      <div>
+        Trung tâm Điều hành PMO Tây Nam Bộ · Căn cứ Tác chiến: TP. Sa Đéc, Tỉnh Đồng Tháp
+      </div>
+      <div style="font-family:'Roboto Mono', monospace; font-size:11px; margin-top:2px;">
+        CONFIDENTIAL · CHỈ LƯU HÀNH NỘI BỘ BAN GIÁM ĐỐC &amp; PMO FIELD TEAM
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.querySelectorAll('.m3-tab-btn').forEach(btn => btn.classList.remove('active'));
+        if (event && event.currentTarget) {
+          event.currentTarget.classList.add('active');
+        }
+      }
+    }
+
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'base',
+      themeVariables: {
+        darkMode: true,
+        background: '#080D0C',
+        fontFamily: 'Google Sans Text, Roboto, sans-serif',
+        fontSize: '13px',
+
+        primaryColor: '#005234',
+        primaryTextColor: '#75F9B9',
+        primaryBorderColor: '#55DC9E',
+
+        secondaryColor: '#004C6E',
+        secondaryTextColor: '#C8E6FF',
+        secondaryBorderColor: '#87CEFF',
+
+        tertiaryColor: '#17231E',
+        tertiaryTextColor: '#E0EBE4',
+        tertiaryBorderColor: '#28342F',
+
+        lineColor: '#89938D',
+        textColor: '#E0EBE4',
+        nodeBorder: '#28342F',
+        clusterBkg: '#121B17',
+        clusterBorder: '#28342F',
+        edgeLabelBackground: '#17231E'
+      },
+      flowchart: {
+        htmlLabels: true,
+        curve: 'basis',
+        padding: 14,
+        nodeSpacing: 30,
+        rankSpacing: 40
+      }
+    });
+  </script>
+</body>
+</html>
