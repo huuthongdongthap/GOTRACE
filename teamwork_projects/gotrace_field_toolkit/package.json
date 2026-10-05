@@ -12,7 +12,7 @@
     "test:edge": "npm run test --workspace=@gotrace/edge-bridge",
     "test:harness": "npm run test --workspace=@gotrace/test-harness",
     "build": "npm run build --workspaces --if-present",
-    "typecheck": "/Users/mac/mekong\\ cli\\ lastest/GOTRACE/pmo-web-app/node_modules/typescript/bin/tsc --noEmit -p tsconfig.json"
+    "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "keywords": [
     "gotrace",

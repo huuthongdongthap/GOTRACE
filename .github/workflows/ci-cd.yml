@@ -24,14 +24,12 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js 20.x
+      - name: Setup Node.js 22.x
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: 'npm'
-          cache-dependency-path: |
-            pmo-web-app/package-lock.json
-            teamwork_projects/gotrace_field_toolkit/package-lock.json
+          cache-dependency-path: pmo-web-app/package-lock.json
 
       # Step 1: Zero-PII & Decree 13/2023/NĐ-CP Audit
       - name: 🔒 Zero-PII Compliance Audit
@@ -48,7 +46,7 @@ jobs:
       - name: 🌾 Test Field Integration Toolkit
         run: |
           cd teamwork_projects/gotrace_field_toolkit
-          npm ci
+          npm ci || npm install
           npm test
 
       # Step 3: Typecheck & Build PMO Web App
@@ -86,10 +84,10 @@ jobs:
           name: gotrace-pmo-static-site
           path: pmo-web-app/out
 
-      - name: Setup Node.js
+      - name: Setup Node.js 22.x
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - name: 🚀 Deploy to Cloudflare Pages
         id: deploy
