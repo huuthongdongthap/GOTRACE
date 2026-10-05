@@ -6,7 +6,7 @@
  */
 
 import { spawnSync } from "node:child_process";
-import { readdirSync } from "node:fs";
+import { readdirSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -19,11 +19,24 @@ console.log("========================================================\n");
 
 // Step 1: Compile TypeScript
 console.log("▶ [1/2] Compiling TypeScript source (tsc)...");
-const tscBin = join(packageRoot, "node_modules", "typescript", "bin", "tsc");
-const buildResult = spawnSync(process.execPath, [tscBin], {
-  cwd: packageRoot,
-  stdio: "inherit",
-});
+let tscBin = join(packageRoot, "node_modules", "typescript", "bin", "tsc");
+if (!existsSync(tscBin)) {
+  const rootTsc = join(packageRoot, "..", "..", "node_modules", "typescript", "bin", "tsc");
+  if (existsSync(rootTsc)) {
+    tscBin = rootTsc;
+  }
+}
+
+const buildResult = existsSync(tscBin)
+  ? spawnSync(process.execPath, [tscBin], {
+      cwd: packageRoot,
+      stdio: "inherit",
+    })
+  : spawnSync("npx", ["tsc"], {
+      cwd: packageRoot,
+      stdio: "inherit",
+      shell: true,
+    });
 
 if (buildResult.status !== 0) {
   console.error("❌ TypeScript compilation failed!");

@@ -45,7 +45,7 @@ jobs:
         run: |
           cd teamwork_projects/gotrace_field_toolkit
           npm install
-          npm test
+          npm run test:all
 
       # Step 3: Typecheck & Build PMO Web App
       - name: ⚡ Typecheck & Build Web App

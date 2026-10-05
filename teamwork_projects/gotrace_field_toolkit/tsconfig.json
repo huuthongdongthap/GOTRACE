@@ -11,9 +11,6 @@
     "allowSyntheticDefaultImports": true,
     "allowImportingTsExtensions": true,
     "noEmit": true,
-    "typeRoots": [
-      "/Users/mac/mekong cli lastest/GOTRACE/pmo-web-app/node_modules/@types"
-    ],
     "types": ["node", "react", "react-dom"]
   },
   "include": [

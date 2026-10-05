@@ -7,7 +7,7 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "node ./node_modules/typescript/bin/tsc",
+    "build": "tsc",
     "test": "node scripts/test-runner.js",
     "test:coverage": "node scripts/test-runner.js"
   },
